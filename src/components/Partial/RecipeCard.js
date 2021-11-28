@@ -60,7 +60,7 @@ const Card = styled.div`
     }
     .btn {
       padding: 0.4rem;
-      color: #080808;
+      color: #191919;
       text-decoration: none;
       border-radius: 0.5rem;
       /* border: 0.1rem solid #fff055; */

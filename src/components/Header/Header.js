@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 export const Header = () => {
   return (
     <NavWrapper>
-      <Logo>Logo</Logo>
+      <Logo>recipeLand</Logo>
       <NavBtns>
         <NavLink className="btn" to="/catalog">
           Catalog
@@ -46,9 +46,10 @@ const NavWrapper = styled.header`
   );
 `;
 
-const Logo = styled.a`
-  color: rgb(255, 194, 0);
+const Logo = styled.div`
   font-size: 40px;
+  color: rgb(255, 194, 0);
+  font-family: 'Lobster', cursive;
 `;
 
 const NavBtns = styled.nav`
