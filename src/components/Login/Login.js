@@ -65,14 +65,7 @@ const Form = styled.form`
     font-size: 25px;
     border-radius: 8px;
     border: 2px solid #fff055;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 194, 0, 1) 0%,
-      rgba(255, 207, 0, 1) 25%,
-      rgba(251, 255, 0, 1) 50%,
-      rgba(255, 207, 0, 1) 75%,
-      rgba(255, 194, 0, 1) 100%
-    );
+    background: rgb(255, 194, 0);
     color: #191919;
     cursor: pointer;
   }

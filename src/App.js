@@ -27,5 +27,5 @@ function App() {
 export default App;
 
 const Content = styled.div`
-  margin-top: 150px;
+  margin: 150px 0 60px 0;
 `;
