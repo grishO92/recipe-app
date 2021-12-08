@@ -1,22 +1,32 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { RecipeCard } from '../Partial/RecipeCard';
+import { getAllRecipies } from '../../services/Crud';
 
 export const Catalog = () => {
+  const [recipies, setRecipies] = useState([]);
+
+  useEffect(() => {
+    getAllRecipies()
+      .then((data) => {
+        setRecipies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Wrapper>
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
+      {recipies.map((x) => (
+        <RecipeCard key={x.id} recipe={x} />
+      ))}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
-  animation: 300ms slideDown ease;
+  animation: 1000ms slideDown ease;
 
   margin-top: 100px;
   display: grid;

@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const RecipeCard = () => {
+export const RecipeCard = ({ recipe }) => {
   return (
     <Card>
-      <img
-        src="https://images.unsplash.com/photo-1555813456-94a3dd418cd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
-        alt=""
-      />
+      <img src={recipe.imgUrl} alt="" />
       <div className="info">
-        <h2>Pancakes</h2>
+        <h2>{recipe.title}</h2>
         <Link className="btn" to="/details/:id">
           Details
         </Link>

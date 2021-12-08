@@ -1,10 +1,41 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { createRecipe } from '../../services/Crud';
+import { useNavigate } from 'react-router';
 
 export const Create = () => {
+  const navigate = useNavigate();
+
+  const onRecipeCreate = (e) => {
+    e.preventDefault();
+    const {
+      title,
+      imgUrl,
+      description,
+      prepTime,
+      portions,
+      level,
+      category,
+      ingredients,
+    } = Object.fromEntries(new FormData(e.currentTarget));
+
+    createRecipe({
+      title,
+      imgUrl,
+      description,
+      prepTime,
+      portions,
+      level,
+      category,
+      ingredients,
+    }).then((result) => {
+      navigate('/');
+    });
+  };
+
   return (
     <Wrapper>
-      <form className="create">
+      <form onSubmit={onRecipeCreate} method="POST" className="create">
         <h2>Create recipe</h2>
         <section className="form-groups">
           <article className="form-group-one">
@@ -135,7 +166,7 @@ export const Create = () => {
 const Wrapper = styled.section`
   display: flex;
   justify-content: center;
-  animation: 300ms slideDown ease;
+  animation: 500ms slideDown ease;
 
   .create {
     box-shadow: 0px 5px 15px 0px black;

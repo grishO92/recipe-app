@@ -135,7 +135,7 @@ export const Edit = () => {
 const Wrapper = styled.section`
   display: flex;
   justify-content: center;
-  animation: 300ms slideDown ease;
+  animation: 500ms slideDown ease;
 
   .edit {
     box-shadow: 0px 5px 15px 0px black;

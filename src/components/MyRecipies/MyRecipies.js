@@ -4,8 +4,8 @@ import { RecipeCard } from '../Partial/RecipeCard';
 export const MyRecipies = () => {
   return (
     <Wrapper>
-      <RecipeCard />
-      <RecipeCard />
+      {/* <RecipeCard />
+      <RecipeCard /> */}
     </Wrapper>
   );
 };

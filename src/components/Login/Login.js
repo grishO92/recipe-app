@@ -42,7 +42,7 @@ const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: 300ms slideDown ease;
+  animation: 500ms slideDown ease;
 
   .login {
     z-index: 1;
