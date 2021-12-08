@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+::placeholder {
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0 auto;

@@ -20,7 +20,7 @@ export const Create = () => {
                   />
                 </section>
                 <section className="inputs">
-                  <label htmlFor="imgUrl">Image URL</label>
+                  <label htmlFor="imgUrl">Image</label>
                   <input
                     type="text"
                     id="imgUrl"
@@ -61,9 +61,9 @@ export const Create = () => {
                       type="text"
                       name="level"
                     >
-                      <option>easy</option>
-                      <option>medium</option>
-                      <option>hard</option>
+                      <option>Easy</option>
+                      <option>Medium</option>
+                      <option>Hard</option>
                     </select>
                   </article>
 
@@ -75,8 +75,8 @@ export const Create = () => {
                       type="text"
                       name="category"
                     >
-                      <option>Food</option>
-                      <option>Drink</option>
+                      <option>Foods</option>
+                      <option>Drinks</option>
                     </select>
                   </article>
                 </section>
