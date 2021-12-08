@@ -7,6 +7,7 @@ import { Header } from './components/Header/Header';
 import { Login } from './components/Login/Login';
 import { MyRecipies } from './components/MyRecipies/MyRecipies';
 import { Register } from './components/Register/Register';
+import { Create } from './components/Create/Create';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <Header className="header" />
       <Content>
         <Routes>
-          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/" element={<Catalog />} />
+          <Route path="/create" element={<Create />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/my-recipies" element={<MyRecipies />} />

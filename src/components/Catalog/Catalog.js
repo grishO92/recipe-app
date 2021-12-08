@@ -21,5 +21,5 @@ const Wrapper = styled.div`
   margin: 0rem;
   gap: 2rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-auto-rows: 400px;
+  grid-auto-rows: 350px;
 `;

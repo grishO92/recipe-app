@@ -5,7 +5,7 @@ export const Login = () => {
   return (
     <Wrapper>
       <Form className="login">
-        <h2>Login form</h2>
+        <h2>Login into account</h2>
         <input type="text" placeholder="Enter Email" required />
         <input type="password" placeholder="Enter Password" required />
         <button type="submit">Log in</button>
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 
 const Form = styled.form`
   box-shadow: 0px 5px 15px 0px black;
-  width: 350px;
+  width: 500px;
   height: auto;
   padding: 20px 60px;
   display: flex;
@@ -57,14 +57,14 @@ const Form = styled.form`
     &:focus {
       outline: none;
       border-radius: 8px;
-      border: 2px solid rgb(95, 211, 95);
+      border: 2px solid rgb(255, 194, 0);
     }
   }
   button {
     padding: 0.5rem;
     font-size: 25px;
     border-radius: 8px;
-    border: 2px solid #fff055;
+    border: 2px solid rgb(255, 194, 0);
     background: rgb(255, 194, 0);
     color: #191919;
     cursor: pointer;

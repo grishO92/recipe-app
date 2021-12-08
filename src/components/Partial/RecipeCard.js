@@ -47,7 +47,7 @@ const Card = styled.div`
       hsl(0 0% 0%/1)
     );
     padding: 20px;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,11 +59,11 @@ const Card = styled.div`
       color: #dfe2db;
     }
     .btn {
-      padding: 0.4rem;
+      font-size: 20px;
+      padding: 7px 14px;
       color: #191919;
       text-decoration: none;
-      border-radius: 0.5rem;
-      /* border: 0.1rem solid #fff055; */
+      border-radius: 8px;
       background: rgb(255, 194, 0);
     }
   }

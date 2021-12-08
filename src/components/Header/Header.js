@@ -6,12 +6,16 @@ export const Header = () => {
     <NavWrapper>
       <Logo>recipeLand</Logo>
       <NavBtns>
-        <NavLink className="btn" to="/catalog">
+        <NavLink className="btn" to="/">
           Catalog
         </NavLink>
         <NavLink className="btn" to="/my-recipies">
           My recipies
         </NavLink>
+        <NavLink className="btn" to="/create">
+          Create recipe
+        </NavLink>
+
         <NavLink className="btn" to="/login">
           Login
         </NavLink>
@@ -36,13 +40,13 @@ const NavWrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 30px;
+  font-size: 25px;
   padding: 15px 40px;
   background: linear-gradient(
     90deg,
-    rgba(16, 16, 16, 1) 0%,
-    rgba(30, 30, 30, 1) 50%,
-    rgba(16, 16, 16, 1) 100%
+    rgba(16, 16, 16, 0.99) 0%,
+    rgba(30, 30, 30, 0.99) 50%,
+    rgba(16, 16, 16, 0.99) 100%
   );
 `;
 
@@ -57,7 +61,7 @@ const NavBtns = styled.nav`
   gap: 30px;
 
   .btn {
-    padding: 10px 20px;
+    padding: 7px 14px;
     border-radius: 8px;
     text-decoration: none;
     color: #dfe2db;
