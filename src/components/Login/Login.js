@@ -4,17 +4,35 @@ import styled from 'styled-components';
 export const Login = () => {
   return (
     <Wrapper>
-      <Form className="login">
+      <form className="login">
         <h2>Login into account</h2>
-        <input type="text" placeholder="Enter Email" required />
-        <input type="password" placeholder="Enter Password" required />
+        <section className="inputs">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter Email"
+            required
+          />
+        </section>
+        <section className="inputs">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter Password"
+            required
+          />
+        </section>
         <button type="submit">Log in</button>
         <h5>
           Don't have an account? Click
           <Link to="/register">here</Link>
           to register.
         </h5>
-      </Form>
+      </form>
     </Wrapper>
   );
 };
@@ -22,62 +40,70 @@ export const Login = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-`;
 
-const Form = styled.form`
-  box-shadow: 0px 5px 15px 0px black;
-  width: 500px;
-  height: auto;
-  padding: 20px 60px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 30px;
-  background: linear-gradient(
-    0deg,
-    rgba(25, 25, 25, 1) 0%,
-    rgba(15, 15, 15, 1) 50%,
-    rgba(25, 25, 25, 1) 100%
-  );
-
-  color: #dfe2db;
-  border-radius: 8px;
-
-  h2 {
+  .login {
+    box-shadow: 0px 5px 15px 0px black;
+    width: 500px;
+    height: auto;
+    padding: 20px 60px;
     display: flex;
     justify-content: center;
-    font-size: 40px;
-  }
-  input {
-    padding: 0.7rem;
-    font-size: 20px;
-    border-radius: 8px;
-    border: 2px solid white;
+    flex-direction: column;
+    gap: 30px;
+    background: linear-gradient(
+      0deg,
+      rgba(25, 25, 25, 1) 0%,
+      rgba(15, 15, 15, 1) 50%,
+      rgba(25, 25, 25, 1) 100%
+    );
 
-    &:focus {
-      outline: none;
+    color: #dfe2db;
+    border-radius: 8px;
+
+    h2 {
+      display: flex;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    .inputs {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 20px;
+
+      input {
+        padding: 0.7rem;
+        font-size: 20px;
+        border-radius: 8px;
+        border: 2px solid white;
+
+        &:focus {
+          outline: none;
+          border-radius: 8px;
+          border: 2px solid rgb(255, 194, 0);
+        }
+      }
+    }
+    button {
+      padding: 0.5rem;
+      font-size: 25px;
       border-radius: 8px;
       border: 2px solid rgb(255, 194, 0);
+      background: rgb(255, 194, 0);
+      color: #191919;
+      cursor: pointer;
     }
-  }
-  button {
-    padding: 0.5rem;
-    font-size: 25px;
-    border-radius: 8px;
-    border: 2px solid rgb(255, 194, 0);
-    background: rgb(255, 194, 0);
-    color: #191919;
-    cursor: pointer;
-  }
 
-  h5 {
-    padding: 0 0 1rem 0;
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-  }
-  h5 a {
-    text-decoration: none;
-    color: #fff055;
+    h5 {
+      padding: 0 0 1rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+    h5 a {
+      text-decoration: none;
+      color: #fff055;
+    }
   }
 `;

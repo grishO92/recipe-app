@@ -29,6 +29,19 @@ export const Create = () => {
                   />
                 </section>
               </article>
+              <section className="inputs">
+                <label htmlFor="description">Description</label>
+                <textarea
+                  rows="4"
+                  type="text"
+                  id="description"
+                  placeholder="enter description"
+                  name="description"
+                />
+              </section>
+            </section>
+
+            <section className="form-group-one-right-section">
               <article className="form-group-one-left-section-second">
                 <section className="form-group-one-left-section-second-sub">
                   <article className="form-group-one-left-section-second-sub-article">
@@ -81,19 +94,6 @@ export const Create = () => {
                   </article>
                 </section>
               </article>
-            </section>
-
-            <section className="form-group-one-right-section">
-              <section className="inputs">
-                <label htmlFor="description">Description</label>
-                <textarea
-                  rows="4"
-                  type="text"
-                  id="description"
-                  placeholder="enter description"
-                  name="description"
-                />
-              </section>
               <section className="inputs">
                 <label htmlFor="category">Ingredients</label>
                 <textarea
@@ -123,7 +123,7 @@ export const Create = () => {
           <button className="form-buttons-createbtn" type="submit">
             Create
           </button>
-          <Link className="form-buttons-cancelBtn" to="/catalog">
+          <Link className="form-buttons-cancelBtn" to="/">
             Cancel
           </Link>
         </section>
@@ -144,6 +144,7 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     flex-direction: column;
     gap: 15px;
     background: linear-gradient(
@@ -190,7 +191,6 @@ const Wrapper = styled.section`
         .inputs {
           display: flex;
           flex-direction: column;
-          align-items: center;
           gap: 5px;
         }
 
@@ -203,9 +203,13 @@ const Wrapper = styled.section`
             display: flex;
             flex-direction: column;
             gap: 10px;
-            width: 270px;
           }
+        }
 
+        .form-group-one-right-section {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           .form-group-one-left-section-second {
             display: flex;
             flex-direction: column;
@@ -213,7 +217,7 @@ const Wrapper = styled.section`
 
             .form-group-one-left-section-second-sub {
               display: flex;
-              justify-content: space-evenly;
+              justify-content: space-between;
               gap: 20px;
 
               .form-group-one-left-section-second-sub-article {
@@ -223,17 +227,11 @@ const Wrapper = styled.section`
                 gap: 5px;
 
                 .form-group-one-left-section-second-sub-article-input {
-                  width: 125px;
+                  width: 123px;
                 }
               }
             }
           }
-        }
-
-        .form-group-one-right-section {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
         }
       }
 
@@ -252,7 +250,7 @@ const Wrapper = styled.section`
       align-items: center;
       text-align: center;
       cursor: pointer;
-      gap: 30px;
+      gap: 20px;
 
       .form-buttons-createbtn,
       .form-buttons-cancelBtn {

@@ -15,7 +15,6 @@ export const Header = () => {
         <NavLink className="btn" to="/create">
           Create recipe
         </NavLink>
-
         <NavLink className="btn" to="/login">
           Login
         </NavLink>
@@ -67,6 +66,10 @@ const NavBtns = styled.nav`
     color: #dfe2db;
 
     &:hover {
+      color: #191919;
+      background: rgb(255, 194, 0);
+    }
+    &[aria-current] {
       color: #191919;
       background: rgb(255, 194, 0);
     }
