@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Create = () => {
+export const Edit = () => {
   return (
     <Wrapper>
-      <form className="create">
-        <h2>Create recipe</h2>
+      <form className="edit">
+        <h2>Edit recipe</h2>
         <section className="form-groups">
           <article className="form-group-one">
             <section className="form-group-one-left-section">
@@ -120,10 +120,10 @@ export const Create = () => {
         </section>
 
         <section className="form-buttons">
-          <button className="form-buttons-createbtn" type="submit">
-            Create
+          <button className="form-buttons-editbtn" type="submit">
+            edit
           </button>
-          <Link className="form-buttons-cancelBtn" to="/">
+          <Link className="form-buttons-cancelBtn" to="/details/:id">
             Cancel
           </Link>
         </section>
@@ -137,7 +137,7 @@ const Wrapper = styled.section`
   justify-content: center;
   animation: 300ms slideDown ease;
 
-  .create {
+  .edit {
     box-shadow: 0px 5px 15px 0px black;
     min-width: 600px;
     height: auto;
@@ -253,7 +253,7 @@ const Wrapper = styled.section`
       cursor: pointer;
       gap: 20px;
 
-      .form-buttons-createbtn,
+      .form-buttons-editbtn,
       .form-buttons-cancelBtn {
         text-decoration: none;
         padding: 7px 14px;

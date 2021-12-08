@@ -9,19 +9,19 @@ export const Header = () => {
         <NavLink className="btn" to="/">
           Catalog
         </NavLink>
-        <NavLink className="btn" to="/my-recipies">
+        <NavLink className="btn" to="my-recipies">
           My recipies
         </NavLink>
-        <NavLink className="btn" to="/create">
+        <NavLink className="btn" to="create">
           Create recipe
         </NavLink>
-        <NavLink className="btn" to="/login">
+        <NavLink className="btn" to="login">
           Login
         </NavLink>
-        <NavLink className="btn" to="/register">
+        <NavLink className="btn" to="register">
           Register
         </NavLink>
-        <NavLink className="btn" to="/logout">
+        <NavLink className="btn" to="logout">
           Logout
         </NavLink>
       </NavBtns>
@@ -30,6 +30,8 @@ export const Header = () => {
 };
 
 const NavWrapper = styled.header`
+  animation: 700ms slideDown ease;
+
   top: 0;
   left: 0;
   right: 0;

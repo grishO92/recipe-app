@@ -11,6 +11,8 @@ export const MyRecipies = () => {
 };
 
 const Wrapper = styled.div`
+  animation: 300ms slideDown ease;
+
   margin-top: 100px;
   display: grid;
   margin: 0rem;

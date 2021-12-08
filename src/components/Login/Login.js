@@ -40,6 +40,7 @@ export const Login = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  animation: 300ms slideDown ease;
 
   .login {
     box-shadow: 0px 5px 15px 0px black;

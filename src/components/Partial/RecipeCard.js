@@ -10,7 +10,7 @@ export const RecipeCard = () => {
       />
       <div className="info">
         <h2>Pancakes</h2>
-        <Link className="btn" to="/details">
+        <Link className="btn" to="/details/:id">
           Details
         </Link>
       </div>
@@ -19,6 +19,7 @@ export const RecipeCard = () => {
 };
 
 const Card = styled.div`
+  animation: 500ms fadeIn ease;
   overflow: hidden;
   border-radius: 0.5rem;
   opacity: 0.8;
@@ -49,6 +50,7 @@ const Card = styled.div`
     padding: 20px;
     border-radius: 8px;
     display: flex;
+    gap: 15px;
     justify-content: center;
     align-items: center;
     flex-direction: column;

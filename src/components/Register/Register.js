@@ -40,6 +40,7 @@ export const Register = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  animation: 300ms slideDown ease;
 
   .register {
     box-shadow: 0px 5px 15px 0px black;

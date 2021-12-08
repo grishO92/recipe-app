@@ -8,18 +8,22 @@ import { Login } from './components/Login/Login';
 import { MyRecipies } from './components/MyRecipies/MyRecipies';
 import { Register } from './components/Register/Register';
 import { Create } from './components/Create/Create';
+import { Edit } from './components/Edit/Edit';
+import { Details } from './components/Details/Details';
 
 function App() {
   return (
     <>
-      <Header className="header" />
+      <Header />
       <Content>
         <Routes>
           <Route path="/" element={<Catalog />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/my-recipies" element={<MyRecipies />} />
+          <Route path="create" element={<Create />} />
+          <Route path="edit/:id" element={<Edit />} />
+          <Route path="details/:id" element={<Details />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="my-recipies" element={<MyRecipies />} />
         </Routes>
       </Content>
     </>
