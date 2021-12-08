@@ -91,7 +91,7 @@ export const Details = () => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   animation: 300ms fadeIn ease;

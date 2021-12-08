@@ -27,26 +27,29 @@ export const Login = () => {
           />
         </section>
         <button type="submit">Log in</button>
-        <h5>
-          Don't have an account? Click
-          <Link to="/register">here</Link>
-          to register.
-        </h5>
       </form>
+      <h5 className="hidden">
+        Don't have an account? Click
+        <Link to="/register">here</Link>
+        to register.
+      </h5>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   animation: 300ms slideDown ease;
 
   .login {
+    z-index: 1;
     box-shadow: 0px 5px 15px 0px black;
     width: 500px;
     height: auto;
-    padding: 20px 60px;
+    padding: 60px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -95,14 +98,25 @@ const Wrapper = styled.div`
       color: #191919;
       cursor: pointer;
     }
-
-    h5 {
-      padding: 0 0 1rem 0;
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-    }
-    h5 a {
+  }
+  .hidden {
+    padding: 0 0 1rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    animation: 1500ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    box-shadow: 0px 5px 15px 0px black;
+    background: linear-gradient(
+      0deg,
+      rgba(25, 25, 25, 1) 0%,
+      rgba(15, 15, 15, 1) 50%,
+      rgba(25, 25, 25, 1) 100%
+    );
+    color: #dfe2db;
+    border-radius: 0 0 8px 8px;
+    padding: 40px;
+    position: relative;
+    a {
       text-decoration: none;
       color: #fff055;
     }

@@ -27,26 +27,29 @@ export const Register = () => {
           />
         </section>
         <button type="submit">Register</button>
-        <h5>
-          Already have an account? Click
-          <Link to="/login">here</Link>
-          to login.
-        </h5>
       </form>
+      <h5 className="hidden">
+        Already have an account? Click
+        <Link to="/login">here</Link>
+        to login.
+      </h5>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   animation: 300ms slideDown ease;
 
   .register {
+    z-index: 1;
     box-shadow: 0px 5px 15px 0px black;
     width: 500px;
     height: auto;
-    padding: 20px 60px;
+    padding: 60px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -94,13 +97,34 @@ const Wrapper = styled.div`
       cursor: pointer;
     }
 
-    h5 {
+    /* h5 {
       padding: 0 0 1rem 0;
       display: flex;
       justify-content: center;
       gap: 4px;
     }
     h5 a {
+      text-decoration: none;
+      color: #fff055;
+    } */
+  }
+  .hidden {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    box-shadow: 0px 5px 15px 0px black;
+    background: linear-gradient(
+      0deg,
+      rgba(25, 25, 25, 1) 0%,
+      rgba(15, 15, 15, 1) 50%,
+      rgba(25, 25, 25, 1) 100%
+    );
+    animation: 1500ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    color: #dfe2db;
+    border-radius: 0 0 8px 8px;
+    padding: 40px;
+    position: relative;
+    a {
       text-decoration: none;
       color: #fff055;
     }

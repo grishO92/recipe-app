@@ -18,7 +18,7 @@ export const RecipeCard = () => {
   );
 };
 
-const Card = styled.div`
+const Card = styled.article`
   animation: 500ms fadeIn ease;
   overflow: hidden;
   border-radius: 0.5rem;

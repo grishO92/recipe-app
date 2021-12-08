@@ -10,7 +10,7 @@ export const MyRecipies = () => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   animation: 300ms slideDown ease;
 
   margin-top: 100px;
