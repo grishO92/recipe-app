@@ -16,6 +16,7 @@
 body {
   margin: 0 auto;
   width: 1300px;
+  background: url('./bg.jpg');
   background: linear-gradient(
     90deg,
     rgba(10, 10, 10, 1) 0%,

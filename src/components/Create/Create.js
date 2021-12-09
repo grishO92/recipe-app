@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { createRecipe } from '../../services/Crud';
 import { useNavigate } from 'react-router';
+import bg from '../../bg.jpg';
 
 export const Create = () => {
   const navigate = useNavigate();
 
   const onRecipeCreate = (e) => {
     e.preventDefault();
-    const {
+    let {
       title,
       imgUrl,
       description,
@@ -18,6 +19,7 @@ export const Create = () => {
       category,
       ingredients,
     } = Object.fromEntries(new FormData(e.currentTarget));
+    // ingredients = [ingredients];
 
     createRecipe({
       title,
@@ -27,7 +29,7 @@ export const Create = () => {
       portions,
       level,
       category,
-      ingredients,
+      ingredients: [ingredients],
     }).then((result) => {
       navigate('/');
     });
@@ -126,14 +128,14 @@ export const Create = () => {
                 </section>
               </article>
               <section className="inputs">
-                <label htmlFor="category">Ingredients</label>
-                <textarea
-                  rows="4"
+                <label htmlFor="ingredients">Ingredients</label>
+                <input
                   type="text"
                   id="ingredients"
                   placeholder="separated by coma"
                   name="ingredients"
                 />
+                <button className="form-button-add">Add</button>
               </section>
             </section>
           </article>
@@ -151,10 +153,10 @@ export const Create = () => {
         </section>
 
         <section className="form-buttons">
-          <button className="form-buttons-createbtn" type="submit">
+          <button className="form-button" type="submit">
             Create
           </button>
-          <Link className="form-buttons-cancelBtn" to="/">
+          <Link className="form-button" to="/">
             Cancel
           </Link>
         </section>
@@ -166,7 +168,7 @@ export const Create = () => {
 const Wrapper = styled.section`
   display: flex;
   justify-content: center;
-  animation: 500ms slideDown ease;
+  animation: 300ms fadeIn ease;
 
   .create {
     box-shadow: 0px 5px 15px 0px black;
@@ -185,6 +187,7 @@ const Wrapper = styled.section`
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
+    background-image: url(${bg});
 
     color: #dfe2db;
     border-radius: 8px;
@@ -224,6 +227,16 @@ const Wrapper = styled.section`
           display: flex;
           flex-direction: column;
           gap: 5px;
+          .form-button-add {
+            text-decoration: none;
+            padding: 7px 14px;
+            font-size: 25px;
+            border-radius: 8px;
+            border: 2px solid rgb(255, 194, 0);
+            background: rgb(255, 194, 0);
+            color: #191919;
+            cursor: pointer;
+          }
         }
 
         .form-group-one-left-section {
@@ -284,8 +297,7 @@ const Wrapper = styled.section`
       cursor: pointer;
       gap: 20px;
 
-      .form-buttons-createbtn,
-      .form-buttons-cancelBtn {
+      .form-button {
         text-decoration: none;
         padding: 7px 14px;
         font-size: 25px;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import bg from '../../bg.jpg';
 
 export const Header = () => {
   return (
@@ -36,7 +37,6 @@ const NavWrapper = styled.header`
   left: 0;
   right: 0;
   z-index: 1;
-  box-shadow: 0px 5px 15px -8px black;
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -49,6 +49,8 @@ const NavWrapper = styled.header`
     rgba(30, 30, 30, 0.99) 50%,
     rgba(16, 16, 16, 0.99) 100%
   );
+  background-image: url(${bg});
+  box-shadow: 0px 5px 15px -8px black;
 `;
 
 const Logo = styled.div`

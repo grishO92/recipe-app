@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import bg from '../../bg.jpg';
+import bg1 from '../../bg1.jpg';
 
 export const Details = () => {
   return (
@@ -70,9 +72,9 @@ export const Details = () => {
         </article>
       </section>
       <section className="how-to-prep">
-        <section className="recipe-desc">
-          <h3 className="recipe-btn">How to prepare?</h3>
-          <p className="recipe-info">
+        <section className="how-to-desc">
+          <h3 className="how-to">How to prepare?</h3>
+          <p className="how-to-info">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
             obcaecati doloribus sunt maiores quam magni recusandae quod officia
             sed consequuntur dolorum, deleniti eum! Fugiat, cum iusto? Commodi
@@ -109,6 +111,8 @@ const Wrapper = styled.section`
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
+    background-image: url(${bg});
+
     color: #dfe2db;
     border-radius: 8px;
     min-width: 768px;
@@ -197,6 +201,7 @@ const Wrapper = styled.section`
     box-shadow: 0px 5px 15px 0px black;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     background: linear-gradient(
       0deg,
@@ -204,10 +209,24 @@ const Wrapper = styled.section`
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
+    background: url(${bg1});
+
     color: #dfe2db;
     border-radius: 0 0 8px 8px;
-    padding: 50px;
+    width: 90%;
+    padding: 60px;
     position: relative;
+    align-self: center;
     top: -10px;
+
+    .how-to-desc {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      .how-to-info {
+        text-align: justify;
+      }
+    }
   }
 `;

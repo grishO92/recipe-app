@@ -41,13 +41,13 @@ const Card = styled.article`
     z-index: 1;
     background: linear-gradient(
       hsl(0 0% 0%/0),
-      hsl(20 0% 0%/0.3) 20%,
-      hsl(0 0% 0%/1)
+      hsl(20 0% 0%/0.3) 25%,
+      hsl(0 0% 0%/0.8)
     );
     padding: 20px;
     border-radius: 8px;
     display: flex;
-    gap: 15px;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     flex-direction: column;

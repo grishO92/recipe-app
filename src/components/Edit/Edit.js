@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import bg from '../../bg.jpg';
 
 export const Edit = () => {
   return (
@@ -135,7 +136,7 @@ export const Edit = () => {
 const Wrapper = styled.section`
   display: flex;
   justify-content: center;
-  animation: 500ms slideDown ease;
+  animation: 300ms fadeIn ease;
 
   .edit {
     box-shadow: 0px 5px 15px 0px black;
@@ -154,6 +155,7 @@ const Wrapper = styled.section`
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
+    background-image: url(${bg});
 
     color: #dfe2db;
     border-radius: 8px;

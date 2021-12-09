@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import bg from '../../bg.jpg';
+import bg1 from '../../bg1.jpg';
 
 export const Login = () => {
   return (
@@ -60,7 +62,7 @@ const Wrapper = styled.section`
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
-
+    background-image: url(${bg});
     color: #dfe2db;
     border-radius: 8px;
 
@@ -112,6 +114,8 @@ const Wrapper = styled.section`
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
+    background-image: url(${bg1});
+
     color: #dfe2db;
     border-radius: 0 0 8px 8px;
     padding: 40px;
