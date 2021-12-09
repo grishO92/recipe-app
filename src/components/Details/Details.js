@@ -225,7 +225,7 @@ const Wrapper = styled.section`
       gap: 20px;
       text-align: center;
       .how-to-info {
-        text-align: justify;
+        text-align: left;
       }
     }
   }

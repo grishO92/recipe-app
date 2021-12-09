@@ -5,13 +5,13 @@ import bg from '../../bg.jpg';
 export const Edit = () => {
   return (
     <Wrapper>
-      <form className="edit">
+      <form method="POST" className="edit">
         <h2>Edit recipe</h2>
-        <section className="form-groups">
-          <article className="form-group-one">
-            <section className="form-group-one-left-section">
-              <article className="form-group-one-left-section-first">
-                <section className="inputs">
+        <fieldset className="form-groups">
+          <fieldset className="form-group-one">
+            <fieldset className="form-group-one-left-section">
+              <fieldset className="form-group-one-left-section-first">
+                <fieldset className="inputs">
                   <label htmlFor="title">Title</label>
                   <input
                     type="text"
@@ -19,8 +19,8 @@ export const Edit = () => {
                     placeholder="recipe name"
                     name="title"
                   />
-                </section>
-                <section className="inputs">
+                </fieldset>
+                <fieldset className="inputs">
                   <label htmlFor="imgUrl">Image</label>
                   <input
                     type="text"
@@ -28,9 +28,9 @@ export const Edit = () => {
                     placeholder="img URL"
                     name="imgUrl"
                   />
-                </section>
-              </article>
-              <section className="inputs">
+                </fieldset>
+              </fieldset>
+              <fieldset className="inputs">
                 <label htmlFor="description">Description</label>
                 <textarea
                   rows="4"
@@ -39,13 +39,13 @@ export const Edit = () => {
                   placeholder="enter description"
                   name="description"
                 />
-              </section>
-            </section>
+              </fieldset>
+            </fieldset>
 
-            <section className="form-group-one-right-section">
-              <article className="form-group-one-left-section-second">
-                <section className="form-group-one-left-section-second-sub">
-                  <article className="form-group-one-left-section-second-sub-article">
+            <fieldset className="form-group-one-right-section">
+              <fieldset className="form-group-one-left-section-second">
+                <fieldset className="form-group-one-left-section-second-sub">
+                  <fieldset className="form-group-one-left-section-second-sub-article">
                     <label htmlFor="prepTime">Prep time</label>
                     <input
                       className="form-group-one-left-section-second-sub-article-input"
@@ -54,8 +54,8 @@ export const Edit = () => {
                       placeholder="in mins"
                       name="prepTime"
                     />
-                  </article>
-                  <article className="form-group-one-left-section-second-sub-article">
+                  </fieldset>
+                  <fieldset className="form-group-one-left-section-second-sub-article">
                     <label htmlFor="portions">Portions</label>
                     <input
                       className="form-group-one-left-section-second-sub-article-input"
@@ -64,10 +64,10 @@ export const Edit = () => {
                       placeholder="Qty"
                       name="portions"
                     />
-                  </article>
-                </section>
-                <section className="form-group-one-left-section-second-sub">
-                  <article className="form-group-one-left-section-second-sub-article">
+                  </fieldset>
+                </fieldset>
+                <fieldset className="form-group-one-left-section-second-sub">
+                  <fieldset className="form-group-one-left-section-second-sub-article">
                     <label htmlFor="level">Difficulty</label>
                     <select
                       className="form-group-one-left-section-second-sub-article-input"
@@ -79,9 +79,9 @@ export const Edit = () => {
                       <option>Medium</option>
                       <option>Hard</option>
                     </select>
-                  </article>
+                  </fieldset>
 
-                  <article className="form-group-one-left-section-second-sub-article">
+                  <fieldset className="form-group-one-left-section-second-sub-article">
                     <label htmlFor="category">Category</label>
                     <select
                       className="form-group-one-left-section-second-sub-article-input"
@@ -92,23 +92,23 @@ export const Edit = () => {
                       <option>Foods</option>
                       <option>Drinks</option>
                     </select>
-                  </article>
-                </section>
-              </article>
-              <section className="inputs">
-                <label htmlFor="category">Ingredients</label>
-                <textarea
-                  rows="4"
+                  </fieldset>
+                </fieldset>
+              </fieldset>
+              <fieldset className="inputs">
+                <label htmlFor="ingredients">Ingredients</label>
+                <input
                   type="text"
                   id="ingredients"
                   placeholder="separated by coma"
                   name="ingredients"
                 />
-              </section>
-            </section>
-          </article>
+                <button className="form-button-add">Add</button>
+              </fieldset>
+            </fieldset>
+          </fieldset>
 
-          <article className="form-group-two">
+          <fieldset className="form-group-two">
             <label htmlFor="directions">Directions</label>
             <textarea
               rows="4"
@@ -117,17 +117,17 @@ export const Edit = () => {
               placeholder="directions"
               name="directions"
             />
-          </article>
-        </section>
+          </fieldset>
+        </fieldset>
 
-        <section className="form-buttons">
-          <button className="form-buttons-editbtn" type="submit">
-            edit
+        <fieldset className="form-buttons">
+          <button className="form-button" type="submit">
+            Edit
           </button>
-          <Link className="form-buttons-cancelBtn" to="/details/:id">
+          <Link className="form-button" to="/">
             Cancel
           </Link>
-        </section>
+        </fieldset>
       </form>
     </Wrapper>
   );
@@ -137,6 +137,11 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   animation: 300ms fadeIn ease;
+  fieldset {
+    border: none;
+    /* margin: 0; */
+    padding: 0;
+  }
 
   .edit {
     box-shadow: 0px 5px 15px 0px black;
@@ -195,6 +200,16 @@ const Wrapper = styled.section`
           display: flex;
           flex-direction: column;
           gap: 5px;
+          .form-button-add {
+            text-decoration: none;
+            padding: 7px 14px;
+            font-size: 25px;
+            border-radius: 8px;
+            border: 2px solid rgb(255, 194, 0);
+            background: rgb(255, 194, 0);
+            color: #191919;
+            cursor: pointer;
+          }
         }
 
         .form-group-one-left-section {
@@ -255,8 +270,7 @@ const Wrapper = styled.section`
       cursor: pointer;
       gap: 20px;
 
-      .form-buttons-editbtn,
-      .form-buttons-cancelBtn {
+      .form-button {
         text-decoration: none;
         padding: 7px 14px;
         font-size: 25px;

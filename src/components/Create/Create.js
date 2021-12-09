@@ -39,11 +39,11 @@ export const Create = () => {
     <Wrapper>
       <form onSubmit={onRecipeCreate} method="POST" className="create">
         <h2>Create recipe</h2>
-        <section className="form-groups">
-          <article className="form-group-one">
-            <section className="form-group-one-left-section">
-              <article className="form-group-one-left-section-first">
-                <section className="inputs">
+        <fieldset className="form-groups">
+          <fieldset className="form-group-one">
+            <fieldset className="form-group-one-left-section">
+              <fieldset className="form-group-one-left-section-first">
+                <fieldset className="inputs">
                   <label htmlFor="title">Title</label>
                   <input
                     type="text"
@@ -51,8 +51,8 @@ export const Create = () => {
                     placeholder="recipe name"
                     name="title"
                   />
-                </section>
-                <section className="inputs">
+                </fieldset>
+                <fieldset className="inputs">
                   <label htmlFor="imgUrl">Image</label>
                   <input
                     type="text"
@@ -60,9 +60,9 @@ export const Create = () => {
                     placeholder="img URL"
                     name="imgUrl"
                   />
-                </section>
-              </article>
-              <section className="inputs">
+                </fieldset>
+              </fieldset>
+              <fieldset className="inputs">
                 <label htmlFor="description">Description</label>
                 <textarea
                   rows="4"
@@ -71,13 +71,13 @@ export const Create = () => {
                   placeholder="enter description"
                   name="description"
                 />
-              </section>
-            </section>
+              </fieldset>
+            </fieldset>
 
-            <section className="form-group-one-right-section">
-              <article className="form-group-one-left-section-second">
-                <section className="form-group-one-left-section-second-sub">
-                  <article className="form-group-one-left-section-second-sub-article">
+            <fieldset className="form-group-one-right-section">
+              <fieldset className="form-group-one-left-section-second">
+                <fieldset className="form-group-one-left-section-second-sub">
+                  <fieldset className="form-group-one-left-section-second-sub-article">
                     <label htmlFor="prepTime">Prep time</label>
                     <input
                       className="form-group-one-left-section-second-sub-article-input"
@@ -86,8 +86,8 @@ export const Create = () => {
                       placeholder="in mins"
                       name="prepTime"
                     />
-                  </article>
-                  <article className="form-group-one-left-section-second-sub-article">
+                  </fieldset>
+                  <fieldset className="form-group-one-left-section-second-sub-article">
                     <label htmlFor="portions">Portions</label>
                     <input
                       className="form-group-one-left-section-second-sub-article-input"
@@ -96,10 +96,10 @@ export const Create = () => {
                       placeholder="Qty"
                       name="portions"
                     />
-                  </article>
-                </section>
-                <section className="form-group-one-left-section-second-sub">
-                  <article className="form-group-one-left-section-second-sub-article">
+                  </fieldset>
+                </fieldset>
+                <fieldset className="form-group-one-left-section-second-sub">
+                  <fieldset className="form-group-one-left-section-second-sub-article">
                     <label htmlFor="level">Difficulty</label>
                     <select
                       className="form-group-one-left-section-second-sub-article-input"
@@ -111,9 +111,9 @@ export const Create = () => {
                       <option>Medium</option>
                       <option>Hard</option>
                     </select>
-                  </article>
+                  </fieldset>
 
-                  <article className="form-group-one-left-section-second-sub-article">
+                  <fieldset className="form-group-one-left-section-second-sub-article">
                     <label htmlFor="category">Category</label>
                     <select
                       className="form-group-one-left-section-second-sub-article-input"
@@ -124,10 +124,10 @@ export const Create = () => {
                       <option>Foods</option>
                       <option>Drinks</option>
                     </select>
-                  </article>
-                </section>
-              </article>
-              <section className="inputs">
+                  </fieldset>
+                </fieldset>
+              </fieldset>
+              <fieldset className="inputs">
                 <label htmlFor="ingredients">Ingredients</label>
                 <input
                   type="text"
@@ -136,11 +136,11 @@ export const Create = () => {
                   name="ingredients"
                 />
                 <button className="form-button-add">Add</button>
-              </section>
-            </section>
-          </article>
+              </fieldset>
+            </fieldset>
+          </fieldset>
 
-          <article className="form-group-two">
+          <fieldset className="form-group-two">
             <label htmlFor="directions">Directions</label>
             <textarea
               rows="4"
@@ -149,17 +149,17 @@ export const Create = () => {
               placeholder="directions"
               name="directions"
             />
-          </article>
-        </section>
+          </fieldset>
+        </fieldset>
 
-        <section className="form-buttons">
+        <fieldset className="form-buttons">
           <button className="form-button" type="submit">
             Create
           </button>
           <Link className="form-button" to="/">
             Cancel
           </Link>
-        </section>
+        </fieldset>
       </form>
     </Wrapper>
   );
@@ -169,6 +169,11 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   animation: 300ms fadeIn ease;
+  fieldset {
+    border: none;
+    /* margin: 0; */
+    padding: 0;
+  }
 
   .create {
     box-shadow: 0px 5px 15px 0px black;

@@ -50,7 +50,7 @@ const NavWrapper = styled.header`
     rgba(16, 16, 16, 0.99) 100%
   );
   background-image: url(${bg});
-  box-shadow: 0px 5px 15px -8px black;
+  box-shadow: 0px 20px 15px -8px black;
 `;
 
 const Logo = styled.div`
