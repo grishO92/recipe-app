@@ -96,7 +96,7 @@ export const Details = () => {
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
-  animation: 300ms fadeIn ease;
+  animation: 300ms fadeIn cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
   .details {
     z-index: 0;
@@ -180,7 +180,7 @@ const Wrapper = styled.section`
       }
       .btns {
         display: flex;
-        gap: 1rem;
+        gap: 20px;
         justify-content: center;
         .btn {
           text-decoration: none;

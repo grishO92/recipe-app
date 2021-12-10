@@ -168,7 +168,7 @@ export const Create = () => {
 const Wrapper = styled.section`
   display: flex;
   justify-content: center;
-  animation: 300ms fadeIn ease;
+  animation: 300ms fadeIn cubic-bezier(0.785, 0.135, 0.15, 0.86);
   fieldset {
     border: none;
     /* margin: 0; */

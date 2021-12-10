@@ -7,7 +7,7 @@ export const RecipeCard = ({ recipe }) => {
       <img src={recipe.imgUrl} alt="" />
       <div className="info">
         <h2>{recipe.title}</h2>
-        <Link className="btn" to="/details/:id">
+        <Link className="btn" to={`/details/${recipe.id}`}>
           Details
         </Link>
       </div>
@@ -52,7 +52,7 @@ const Card = styled.article`
     align-items: center;
     flex-direction: column;
     transform: translateY(0);
-    transition: transform 500ms ease;
+    transition: transform 500ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
     h2 {
       color: #dfe2db;

@@ -18,12 +18,12 @@ function App() {
       <Content>
         <Routes>
           <Route path="/" element={<Catalog />} />
-          <Route path="create" element={<Create />} />
-          <Route path="edit/:id" element={<Edit />} />
-          <Route path="details/:id" element={<Details />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="my-recipies" element={<MyRecipies />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/my-recipies" element={<MyRecipies />} />
+          <Route path="/edit/:id" element={<Edit />} />
+          <Route path="/details/:id" element={<Details />} />
         </Routes>
       </Content>
     </>

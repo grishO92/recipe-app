@@ -44,7 +44,7 @@ const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: 500ms slideDown ease;
+  animation: 500ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
   .register {
     z-index: 1;
