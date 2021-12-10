@@ -1,19 +1,30 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
 import bg1 from '../../bg1.jpg';
+import { getRecipeById } from '../../services/Crud';
 
 export const Details = () => {
+  const [recipe, setRecipe] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    getRecipeById(id)
+      .then((doc) => {
+        setRecipe(doc.data());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
   return (
     <Wrapper>
       <section className="details">
         <article className="content">
           <section className="img-wrapper">
-            <img
-              className="img"
-              src="https://images.unsplash.com/photo-1555813456-94a3dd418cd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
-              alt="detail"
-            />
+            <img className="img" src={recipe.imgUrl} alt="detail" />
           </section>
           <section className="card">
             <h2>Details</h2>
@@ -21,38 +32,34 @@ export const Details = () => {
             <article className="detail-grid">
               <section className="desc">
                 <h3 className="title">
-                  <span>title: </span>Pancakes
+                  <span>title: </span>
+                  {recipe.title}
                 </h3>
                 <h3 className="author">
                   <span>author: </span>Bro
                 </h3>
                 <p className="Description">
-                  <span>description: </span> Lorem ipsum dolor sit amet
-                  consectetur, adipisicing elit. Nobis tempora architecto error
-                  distinctio facere
+                  <span>description: </span>
+                  {recipe.title}
                 </p>
-                <h3>
+                <h4>
                   Recipe:
-                  <ul className="recipe">
-                    <li>eggs</li>
-                    <li>flower</li>
-                    <li>oil</li>
-                    <li>backing soda</li>
-                    <li>milk</li>
-                  </ul>
-                </h3>
+                  {recipe.ingredients?.map((x) => (
+                    <li key={x}>{x}</li>
+                  ))}
+                </h4>
                 <article className="prep-info">
                   <section className="prep-info-sub">
                     <h3 className="prep-info-sub-title">Time</h3>
-                    <p>10 minutes</p>
+                    <p> {recipe.prepTime} minutes</p>
                   </section>
                   <section className="prep-info-sub">
                     <h3 className="prep-info-sub-title">Portions</h3>
-                    <p>10 </p>
+                    <p> {recipe.portions}</p>
                   </section>
                   <section className="prep-info-sub">
                     <h3 className="prep-info-sub-title">Level</h3>
-                    <p>Easy</p>
+                    <p> {recipe.level}</p>
                   </section>
                 </article>
               </section>
@@ -74,19 +81,7 @@ export const Details = () => {
       <section className="how-to-prep">
         <section className="how-to-desc">
           <h3 className="how-to">How to prepare?</h3>
-          <p className="how-to-info">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-            obcaecati doloribus sunt maiores quam magni recusandae quod officia
-            sed consequuntur dolorum, deleniti eum! Fugiat, cum iusto? Commodi
-            incidunt molestiae tempore? Lorem, ipsum dolor sit amet consectetur
-            adipisicing elit. Aspernatur obcaecati doloribus sunt maiores quam
-            magni recusandae quod officia sed consequuntur dolorum, deleniti
-            eum! Fugiat, cum iusto? Commodi incidunt molestiae tempore? Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-            obcaecati doloribus sunt maiores quam magni recusandae quod officia
-            sed consequuntur dolorum, deleniti eum! Fugiat, cum iusto? Commodi
-            incidunt molestiae tempore?
-          </p>
+          <p className="how-to-info">{recipe.directions}</p>
         </section>
       </section>
     </Wrapper>
@@ -96,7 +91,7 @@ export const Details = () => {
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
-  animation: 300ms fadeIn cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation: 500ms fadeIn cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
   .details {
     z-index: 0;
@@ -134,7 +129,7 @@ const Wrapper = styled.section`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin: 0px 60px;
+        padding: 20px 60px;
         gap: 2rem;
         border-radius: 0.5rem;
         h2 {
@@ -177,20 +172,20 @@ const Wrapper = styled.section`
             }
           }
         }
-      }
-      .btns {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        .btn {
-          text-decoration: none;
-          padding: 0.5rem;
-          font-size: 25px;
-          border-radius: 8px;
-          border: 2px solid rgb(255, 194, 0);
-          background: rgb(255, 194, 0);
-          color: #191919;
-          cursor: pointer;
+        .btns {
+          display: flex;
+          gap: 20px;
+          justify-content: center;
+          .btn {
+            text-decoration: none;
+            padding: 0.5rem;
+            font-size: 25px;
+            border-radius: 8px;
+            border: 2px solid rgb(255, 194, 0);
+            background: rgb(255, 194, 0);
+            color: #191919;
+            cursor: pointer;
+          }
         }
       }
     }
