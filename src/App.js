@@ -32,6 +32,6 @@ function App() {
 
 export default App;
 
-const Content = styled.div`
+const Content = styled.section`
   margin: 150px 0 60px 0;
 `;

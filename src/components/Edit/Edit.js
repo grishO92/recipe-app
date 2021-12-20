@@ -1,11 +1,60 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
+import { getRecipeById, updateRecipe } from '../../services/Crud';
 
 export const Edit = () => {
+  const [recipe, setRecipe] = useState([]);
+  const [level, setLevel] = useState([]);
+  const [category, setCategory] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getRecipeById(id)
+      .then((doc) => {
+        setRecipe(doc.data());
+        setLevel(recipe.level);
+        setCategory(recipe.category);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
+  const onRecipeUpdate = (e) => {
+    e.preventDefault();
+    let {
+      title,
+      imgUrl,
+      description,
+      prepTime,
+      portions,
+      level,
+      category,
+      ingredients,
+      directions,
+    } = Object.fromEntries(new FormData(e.currentTarget));
+
+    updateRecipe(id, {
+      title,
+      imgUrl,
+      description,
+      prepTime,
+      portions,
+      level,
+      category,
+      ingredients: [ingredients],
+      directions,
+    }).then((result) => {
+      navigate(`/details/${id}`);
+    });
+  };
+
   return (
     <Wrapper>
-      <form method="POST" className="edit">
+      <form onSubmit={onRecipeUpdate} method="PUT" className="edit">
         <h2>Edit recipe</h2>
         <fieldset className="form-groups">
           <fieldset className="form-group-one">
@@ -18,6 +67,7 @@ export const Edit = () => {
                     id="title"
                     placeholder="recipe name"
                     name="title"
+                    defaultValue={recipe.title}
                   />
                 </fieldset>
                 <fieldset className="inputs">
@@ -27,6 +77,7 @@ export const Edit = () => {
                     id="imgUrl"
                     placeholder="img URL"
                     name="imgUrl"
+                    defaultValue={recipe.imgUrl}
                   />
                 </fieldset>
               </fieldset>
@@ -38,6 +89,7 @@ export const Edit = () => {
                   id="description"
                   placeholder="enter description"
                   name="description"
+                  defaultValue={recipe.description}
                 />
               </fieldset>
             </fieldset>
@@ -53,6 +105,7 @@ export const Edit = () => {
                       id="prepTime"
                       placeholder="in mins"
                       name="prepTime"
+                      defaultValue={recipe.prepTime}
                     />
                   </fieldset>
                   <fieldset className="form-group-one-left-section-second-sub-article">
@@ -63,6 +116,7 @@ export const Edit = () => {
                       id="portions"
                       placeholder="Qty"
                       name="portions"
+                      defaultValue={recipe.portions}
                     />
                   </fieldset>
                 </fieldset>
@@ -116,6 +170,7 @@ export const Edit = () => {
               id="directions"
               placeholder="directions"
               name="directions"
+              defaultValue={recipe.directions}
             />
           </fieldset>
         </fieldset>
@@ -124,7 +179,7 @@ export const Edit = () => {
           <button className="form-button" type="submit">
             Edit
           </button>
-          <Link className="form-button" to="/">
+          <Link className="form-button" to={`/details/${id}`}>
             Cancel
           </Link>
         </fieldset>

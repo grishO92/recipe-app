@@ -60,13 +60,15 @@ const Category = styled.section`
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  padding: 15px;
+  padding: 10px;
   gap: 10px;
   left: -2px;
   top: 20%;
   .category {
+    text-align: center;
+    justify-self: center;
     font-size: 22px;
     background: transparent;
     border: none;
@@ -92,7 +94,7 @@ const Aside = styled.aside`
 
 const Under = styled.section`
   z-index: -2;
-  animation: 1500ms slideToRight cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation: 1000ms slideToRight1 cubic-bezier(0.785, 0.135, 0.15, 0.86);
   box-shadow: 0px 20px 15px -8px black;
   background: url(${bg1});
   color: #dfe2db;

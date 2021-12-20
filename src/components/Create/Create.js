@@ -18,6 +18,7 @@ export const Create = () => {
       level,
       category,
       ingredients,
+      directions,
     } = Object.fromEntries(new FormData(e.currentTarget));
     // ingredients = [ingredients];
 
@@ -30,6 +31,7 @@ export const Create = () => {
       level,
       category,
       ingredients: [ingredients],
+      directions,
     }).then((result) => {
       navigate('/');
     });

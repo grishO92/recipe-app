@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
 import bg1 from '../../bg1.jpg';
-import { getRecipeById } from '../../services/Crud';
+
+import { deleteRecipe, getRecipeById } from '../../services/Crud';
 
 export const Details = () => {
   const [recipe, setRecipe] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getRecipeById(id)
@@ -18,6 +20,12 @@ export const Details = () => {
         console.log(err);
       });
   }, [id]);
+
+  const onDeleteRecipe = () => {
+    deleteRecipe(id).then((result) => {
+      navigate('/');
+    });
+  };
 
   return (
     <Wrapper>
@@ -40,7 +48,7 @@ export const Details = () => {
                 </h3>
                 <p className="Description">
                   <span>description: </span>
-                  {recipe.title}
+                  {recipe.description}
                 </p>
                 <h4>
                   Recipe:
@@ -65,10 +73,14 @@ export const Details = () => {
               </section>
             </article>
             <section className="btns">
-              <Link className="btn edit" to="/edit/:id">
+              <Link className="btn edit" to={`/edit/${id}`}>
                 Edit
               </Link>
-              <Link className="btn delete" to="catalog">
+              <Link
+                onClick={onDeleteRecipe}
+                className="btn delete"
+                to="catalog"
+              >
                 Delete
               </Link>
               <Link className="btn back" to="/">
