@@ -7,6 +7,7 @@ import bg1 from '../../bg1.jpg';
 
 export const Catalog = () => {
   const [recipies, setRecipies] = useState([]);
+  const [filteredRecipe, setFilteredRecipe] = useState([]);
 
   useEffect(() => {
     getAllRecipies()
@@ -18,20 +19,30 @@ export const Catalog = () => {
       });
   }, []);
 
+  const onClickHandler = (e) => {
+    if (e.target.textContent === 'All') {
+      setFilteredRecipe(recipies);
+    } else if (e.target.textContent === 'Drinks') {
+      setFilteredRecipe(recipies.filter((x) => x.category === 'Drinks'));
+    } else if (e.target.textContent === 'Foods') {
+      setFilteredRecipe(recipies.filter((x) => x.category === 'Foods'));
+    }
+  };
+
   return (
     <Wrapper>
       <Aside>
         <Under />
-        <Category>
+        <Category onClick={onClickHandler}>
           <button className="category">All</button>
           <button className="category">Foods</button>
           <button className="category">Drinks</button>
         </Category>
       </Aside>
       <CatalogGrid>
-        {recipies.map((x) => (
-          <RecipeCard key={x.id} recipe={x} />
-        ))}
+        {filteredRecipe.length <= 0
+          ? recipies.map((x) => <RecipeCard key={x.id} recipe={x} />)
+          : filteredRecipe.map((x) => <RecipeCard key={x.id} recipe={x} />)}
       </CatalogGrid>
     </Wrapper>
   );
