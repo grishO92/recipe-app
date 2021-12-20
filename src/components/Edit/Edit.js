@@ -6,8 +6,8 @@ import { getRecipeById, updateRecipe } from '../../services/Crud';
 
 export const Edit = () => {
   const [recipe, setRecipe] = useState([]);
-  const [level, setLevel] = useState([]);
-  const [category, setCategory] = useState([]);
+  // const [level, setLevel] = useState([]);
+  // const [category, setCategory] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -15,8 +15,8 @@ export const Edit = () => {
     getRecipeById(id)
       .then((doc) => {
         setRecipe(doc.data());
-        setLevel(recipe.level);
-        setCategory(recipe.category);
+        // setLevel(recipe.level);
+        // setCategory(recipe.category);
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +45,7 @@ export const Edit = () => {
       portions,
       level,
       category,
-      ingredients: [ingredients],
+      ingredients: ingredients.split(','),
       directions,
     }).then((result) => {
       navigate(`/details/${id}`);
@@ -151,13 +151,22 @@ export const Edit = () => {
               </fieldset>
               <fieldset className="inputs">
                 <label htmlFor="ingredients">Ingredients</label>
+                <textarea
+                  rows="4"
+                  type="text"
+                  id="ingredients"
+                  placeholder="ingredients"
+                  name="ingredients"
+                  defaultValue={recipe.ingredients}
+                />
+                {/* <label htmlFor="ingredients">Ingredients</label>
                 <input
                   type="text"
                   id="ingredients"
                   placeholder="separated by coma"
                   name="ingredients"
                 />
-                <button className="form-button-add">Add</button>
+                <button className="form-button-add">Add</button> */}
               </fieldset>
             </fieldset>
           </fieldset>

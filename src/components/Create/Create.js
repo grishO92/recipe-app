@@ -3,9 +3,15 @@ import styled from 'styled-components';
 import { createRecipe } from '../../services/Crud';
 import { useNavigate } from 'react-router';
 import bg from '../../bg.jpg';
+// import { useState } from 'react';
 
 export const Create = () => {
   const navigate = useNavigate();
+  // const [ingredients, setIngredients] = useState([]);
+
+  // const addIngredientHandler = (value) => {
+  //   setIngredients(value);
+  // };
 
   const onRecipeCreate = (e) => {
     e.preventDefault();
@@ -20,7 +26,8 @@ export const Create = () => {
       ingredients,
       directions,
     } = Object.fromEntries(new FormData(e.currentTarget));
-    // ingredients = [ingredients];
+
+    // ingredients = ingredients.split(',');
 
     createRecipe({
       title,
@@ -30,7 +37,7 @@ export const Create = () => {
       portions,
       level,
       category,
-      ingredients: [ingredients],
+      ingredients: ingredients.split(','),
       directions,
     }).then((result) => {
       navigate('/');
@@ -131,13 +138,26 @@ export const Create = () => {
               </fieldset>
               <fieldset className="inputs">
                 <label htmlFor="ingredients">Ingredients</label>
-                <input
+                <textarea
+                  rows="4"
                   type="text"
                   id="ingredients"
                   placeholder="separated by coma"
                   name="ingredients"
                 />
-                <button className="form-button-add">Add</button>
+                {/* <input
+                  type="text"
+                  id="ingredients"
+                  placeholder="separated by coma"
+                  name="ingredients"
+                />
+                <button
+                  onClick={addIngredientHandler}
+                  type="button"
+                  className="form-button-add"
+                >
+                  Add
+                </button> */}
               </fieldset>
             </fieldset>
           </fieldset>
