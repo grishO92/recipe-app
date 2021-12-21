@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { RecipeCard } from '../Partial/RecipeCard';
+// import { RecipeCard } from '../Partial/RecipeCard';
 
 export const MyRecipies = () => {
   return (

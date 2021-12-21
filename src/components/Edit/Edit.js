@@ -6,8 +6,6 @@ import { getRecipeById, updateRecipe } from '../../services/Crud';
 
 export const Edit = () => {
   const [recipe, setRecipe] = useState([]);
-  // const [level, setLevel] = useState([]);
-  // const [category, setCategory] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -15,13 +13,30 @@ export const Edit = () => {
     getRecipeById(id)
       .then((doc) => {
         setRecipe(doc.data());
-        // setLevel(recipe.level);
-        // setCategory(recipe.category);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [id]);
+
+  const easy = (
+    <>
+      <option>Medium</option>
+      <option>Hard</option>
+    </>
+  );
+  const medium = (
+    <>
+      <option>Easy</option>
+      <option>Hard</option>
+    </>
+  );
+  const hard = (
+    <>
+      <option>Easy</option>
+      <option>Medium</option>
+    </>
+  );
 
   const onRecipeUpdate = (e) => {
     e.preventDefault();
@@ -126,12 +141,14 @@ export const Edit = () => {
                     <select
                       className="form-group-one-left-section-second-sub-article-input"
                       id="level"
-                      type="text"
                       name="level"
                     >
-                      <option>Easy</option>
-                      <option>Medium</option>
-                      <option>Hard</option>
+                      <option>{recipe.level}</option>
+                      {recipe.level === 'Easy'
+                        ? easy
+                        : recipe.level === 'Medium'
+                        ? medium
+                        : hard}
                     </select>
                   </fieldset>
 
@@ -140,11 +157,14 @@ export const Edit = () => {
                     <select
                       className="form-group-one-left-section-second-sub-article-input"
                       id="category"
-                      type="text"
                       name="category"
                     >
-                      <option>Foods</option>
-                      <option>Drinks</option>
+                      <option>{recipe.category}</option>
+                      {recipe.category === 'Foods' ? (
+                        <option>Drinks</option>
+                      ) : (
+                        <option>Foods</option>
+                      )}
                     </select>
                   </fieldset>
                 </fieldset>
@@ -159,14 +179,6 @@ export const Edit = () => {
                   name="ingredients"
                   defaultValue={recipe.ingredients}
                 />
-                {/* <label htmlFor="ingredients">Ingredients</label>
-                <input
-                  type="text"
-                  id="ingredients"
-                  placeholder="separated by coma"
-                  name="ingredients"
-                />
-                <button className="form-button-add">Add</button> */}
               </fieldset>
             </fieldset>
           </fieldset>
@@ -309,7 +321,7 @@ const Wrapper = styled.section`
                 gap: 5px;
 
                 .form-group-one-left-section-second-sub-article-input {
-                  width: 123px;
+                  width: 133px;
                 }
               }
             }

@@ -8,7 +8,6 @@ import bg from '../../bg.jpg';
 export const Create = () => {
   const navigate = useNavigate();
   // const [ingredients, setIngredients] = useState([]);
-
   // const addIngredientHandler = (value) => {
   //   setIngredients(value);
   // };
@@ -26,8 +25,6 @@ export const Create = () => {
       ingredients,
       directions,
     } = Object.fromEntries(new FormData(e.currentTarget));
-
-    // ingredients = ingredients.split(',');
 
     createRecipe({
       title,
@@ -299,7 +296,7 @@ const Wrapper = styled.section`
                 gap: 5px;
 
                 .form-group-one-left-section-second-sub-article-input {
-                  width: 123px;
+                  width: 133px;
                 }
               }
             }
