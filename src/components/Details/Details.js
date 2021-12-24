@@ -13,7 +13,6 @@ export const Details = () => {
   const navigate = useNavigate();
 
   const { user } = useUserAuth();
-  console.log(user);
 
   useEffect(() => {
     getRecipeById(id)

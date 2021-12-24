@@ -5,7 +5,6 @@ import { logout } from '../../services/Auth';
 import { useUserAuth } from '../../context/UserAuthContext';
 
 export const Header = () => {
-  console.log(useUserAuth());
   const { user } = useUserAuth();
   const navigate = useNavigate();
 

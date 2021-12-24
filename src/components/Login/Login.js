@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
 import bg1 from '../../bg1.jpg';
@@ -51,7 +51,7 @@ export const Login = () => {
     </Wrapper>
   );
 
-  return <>{!user ? guest : navigate('/')}</>;
+  return <>{!user ? guest : <Navigate to="/" />}</>;
 };
 
 const Wrapper = styled.section`

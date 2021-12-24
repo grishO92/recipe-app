@@ -7,10 +7,6 @@ import bg from '../../bg.jpg';
 
 export const Create = () => {
   const navigate = useNavigate();
-  // const [ingredients, setIngredients] = useState([]);
-  // const addIngredientHandler = (value) => {
-  //   setIngredients(value);
-  // };
 
   const onRecipeCreate = (e) => {
     e.preventDefault();
@@ -142,19 +138,6 @@ export const Create = () => {
                   placeholder="separated by coma"
                   name="ingredients"
                 />
-                {/* <input
-                  type="text"
-                  id="ingredients"
-                  placeholder="separated by coma"
-                  name="ingredients"
-                />
-                <button
-                  onClick={addIngredientHandler}
-                  type="button"
-                  className="form-button-add"
-                >
-                  Add
-                </button> */}
               </fieldset>
             </fieldset>
           </fieldset>
