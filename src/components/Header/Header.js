@@ -1,8 +1,45 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import bg from '../../bg.jpg';
+import { logout } from '../../services/Auth';
+import { useUserAuth } from '../../context/UserAuthContext';
 
 export const Header = () => {
+  console.log(useUserAuth());
+  const { user } = useUserAuth();
+  const navigate = useNavigate();
+
+  const onLogout = (e) => {
+    e.preventDefault();
+    logout();
+    navigate('/');
+  };
+
+  const loggedIn = (
+    <>
+      <NavLink className="btn" to="my-recipies">
+        My recipies
+      </NavLink>
+      <NavLink className="btn" to="create">
+        Create recipe
+      </NavLink>
+      <button className="btn" onClick={onLogout}>
+        Logout
+      </button>
+    </>
+  );
+
+  const guest = (
+    <>
+      <NavLink className="btn" to="login">
+        Login
+      </NavLink>
+      <NavLink className="btn" to="register">
+        Register
+      </NavLink>
+    </>
+  );
+
   return (
     <NavWrapper>
       <Logo>recipeLand</Logo>
@@ -10,21 +47,7 @@ export const Header = () => {
         <NavLink className="btn" to="/">
           Catalog
         </NavLink>
-        <NavLink className="btn" to="my-recipies">
-          My recipies
-        </NavLink>
-        <NavLink className="btn" to="create">
-          Create recipe
-        </NavLink>
-        <NavLink className="btn" to="login">
-          Login
-        </NavLink>
-        <NavLink className="btn" to="register">
-          Register
-        </NavLink>
-        <NavLink className="btn" to="logout">
-          Logout
-        </NavLink>
+        {user ? loggedIn : guest}
       </NavBtns>
     </NavWrapper>
   );
@@ -64,10 +87,13 @@ const NavBtns = styled.nav`
   gap: 30px;
 
   .btn {
+    font-size: 25px;
     padding: 7px 14px;
     border-radius: 8px;
     text-decoration: none;
     color: #dfe2db;
+    border: none;
+    background-color: transparent;
 
     &:hover {
       color: #191919;

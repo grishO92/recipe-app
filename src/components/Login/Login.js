@@ -1,12 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
 import bg1 from '../../bg1.jpg';
+import { useUserAuth } from '../../context/UserAuthContext';
+import { login } from '../../services/Auth';
 
 export const Login = () => {
-  return (
+  const navigate = useNavigate();
+  const { user } = useUserAuth();
+
+  const onLogin = (e) => {
+    e.preventDefault();
+
+    let { email, password } = Object.fromEntries(new FormData(e.currentTarget));
+
+    login(email, password).then((result) => navigate('/'));
+  };
+
+  const guest = (
     <Wrapper>
-      <form className="login">
+      <form method="POST" onSubmit={onLogin} className="login">
         <h2>Login into account</h2>
         <section className="inputs">
           <label htmlFor="email">Email</label>
@@ -37,6 +50,8 @@ export const Login = () => {
       </h5>
     </Wrapper>
   );
+
+  return <>{!user ? guest : navigate('/')}</>;
 };
 
 const Wrapper = styled.section`

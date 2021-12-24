@@ -1,12 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
 import bg1 from '../../bg1.jpg';
+import { useUserAuth } from '../../context/UserAuthContext';
+import { register } from '../../services/Auth';
 
 export const Register = () => {
-  return (
+  const navigate = useNavigate();
+  const { user } = useUserAuth();
+  const onRegister = (e) => {
+    e.preventDefault();
+
+    let { email, password } = Object.fromEntries(new FormData(e.currentTarget));
+
+    register(email, password).then((result) => navigate('/'));
+  };
+
+  const guest = (
     <Wrapper>
-      <form className="register">
+      <form method="POST" onSubmit={onRegister} className="register">
         <h2>Create account</h2>
         <section className="inputs">
           <label htmlFor="email">Email</label>
@@ -37,6 +49,8 @@ export const Register = () => {
       </h5>
     </Wrapper>
   );
+
+  return <>{!user ? guest : navigate('/')}</>;
 };
 
 const Wrapper = styled.section`

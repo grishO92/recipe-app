@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
 import bg1 from '../../bg1.jpg';
+import { useUserAuth } from '../../context/UserAuthContext';
 
 import { deleteRecipe, getRecipeById } from '../../services/Crud';
 
@@ -10,6 +11,9 @@ export const Details = () => {
   const [recipe, setRecipe] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const { user } = useUserAuth();
+  console.log(user);
 
   useEffect(() => {
     getRecipeById(id)
@@ -26,6 +30,20 @@ export const Details = () => {
       navigate('/');
     });
   };
+
+  const loggedUserBtns = (
+    <>
+      <Link className="btn edit" to={`/edit/${id}`}>
+        Edit
+      </Link>
+      <Link onClick={onDeleteRecipe} className="btn delete" to="catalog">
+        Delete
+      </Link>
+      <Link className="btn back" to="/">
+        Back
+      </Link>
+    </>
+  );
 
   return (
     <Wrapper>
@@ -44,7 +62,8 @@ export const Details = () => {
                   {recipe.title}
                 </h3>
                 <h3 className="author">
-                  <span>author: </span>Bro
+                  <span>author: </span>
+                  {user ? user.email : null}
                 </h3>
                 <p className="Description">
                   <span>description: </span>
@@ -73,19 +92,13 @@ export const Details = () => {
               </section>
             </article>
             <section className="btns">
-              <Link className="btn edit" to={`/edit/${id}`}>
-                Edit
-              </Link>
-              <Link
-                onClick={onDeleteRecipe}
-                className="btn delete"
-                to="catalog"
-              >
-                Delete
-              </Link>
-              <Link className="btn back" to="/">
-                Back
-              </Link>
+              {user ? (
+                loggedUserBtns
+              ) : (
+                <Link className="btn back" to="/">
+                  Back
+                </Link>
+              )}
             </section>
           </section>
         </article>
