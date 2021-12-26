@@ -19,25 +19,6 @@ export const Edit = () => {
       });
   }, [id]);
 
-  const easy = (
-    <>
-      <option>Medium</option>
-      <option>Hard</option>
-    </>
-  );
-  const medium = (
-    <>
-      <option>Easy</option>
-      <option>Hard</option>
-    </>
-  );
-  const hard = (
-    <>
-      <option>Easy</option>
-      <option>Medium</option>
-    </>
-  );
-
   const onRecipeUpdate = (e) => {
     e.preventDefault();
     let {
@@ -144,11 +125,22 @@ export const Edit = () => {
                       name="level"
                     >
                       <option>{recipe.level}</option>
-                      {recipe.level === 'Easy'
-                        ? easy
-                        : recipe.level === 'Medium'
-                        ? medium
-                        : hard}
+                      {recipe.level === 'Easy' ? (
+                        <>
+                          <option>Medium</option>
+                          <option>Hard</option>
+                        </>
+                      ) : recipe.level === 'Medium' ? (
+                        <>
+                          <option>Easy</option>
+                          <option>Hard</option>
+                        </>
+                      ) : (
+                        <>
+                          <option>Easy</option>
+                          <option>Medium</option>
+                        </>
+                      )}
                     </select>
                   </fieldset>
 

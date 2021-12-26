@@ -30,20 +30,6 @@ export const Details = () => {
     });
   };
 
-  const loggedUserBtns = (
-    <>
-      <Link className="btn edit" to={`/edit/${id}`}>
-        Edit
-      </Link>
-      <Link onClick={onDeleteRecipe} className="btn delete" to="catalog">
-        Delete
-      </Link>
-      <Link className="btn back" to="/">
-        Back
-      </Link>
-    </>
-  );
-
   return (
     <Wrapper>
       <section className="details">
@@ -61,8 +47,8 @@ export const Details = () => {
                   {recipe.title}
                 </h3>
                 <h3 className="author">
-                  <span>author: </span>
-                  {user ? user.email : null}
+                  <span>Category: </span>
+                  {recipe.category}
                 </h3>
                 <p className="Description">
                   <span>description: </span>
@@ -92,7 +78,21 @@ export const Details = () => {
             </article>
             <section className="btns">
               {user ? (
-                loggedUserBtns
+                <>
+                  <Link className="btn edit" to={`/edit/${id}`}>
+                    Edit
+                  </Link>
+                  <Link
+                    onClick={onDeleteRecipe}
+                    className="btn delete"
+                    to="catalog"
+                  >
+                    Delete
+                  </Link>
+                  <Link className="btn back" to="/">
+                    Back
+                  </Link>
+                </>
               ) : (
                 <Link className="btn back" to="/">
                   Back

@@ -14,31 +14,6 @@ export const Header = () => {
     navigate('/');
   };
 
-  const loggedIn = (
-    <>
-      <NavLink className="btn" to="my-recipies">
-        My recipies
-      </NavLink>
-      <NavLink className="btn" to="create">
-        Create recipe
-      </NavLink>
-      <button className="btn" onClick={onLogout}>
-        Logout
-      </button>
-    </>
-  );
-
-  const guest = (
-    <>
-      <NavLink className="btn" to="login">
-        Login
-      </NavLink>
-      <NavLink className="btn" to="register">
-        Register
-      </NavLink>
-    </>
-  );
-
   return (
     <NavWrapper>
       <Logo>recipeLand</Logo>
@@ -46,7 +21,28 @@ export const Header = () => {
         <NavLink className="btn" to="/">
           Catalog
         </NavLink>
-        {user ? loggedIn : guest}
+        {user ? (
+          <>
+            <NavLink className="btn" to="my-recipies">
+              My recipies
+            </NavLink>
+            <NavLink className="btn" to="create">
+              Create recipe
+            </NavLink>
+            <button className="btn" onClick={onLogout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <NavLink className="btn" to="login">
+              Login
+            </NavLink>
+            <NavLink className="btn" to="register">
+              Register
+            </NavLink>
+          </>
+        )}
       </NavBtns>
     </NavWrapper>
   );

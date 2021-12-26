@@ -7,6 +7,7 @@ export const RecipeCard = ({ recipe }) => {
       <img src={recipe.imgUrl} alt="" />
       <div className="info">
         <h2>{recipe.title}</h2>
+        <p>{recipe.description}</p>
         <Link className="btn" to={`/details/${recipe.id}`}>
           Details
         </Link>
@@ -54,7 +55,8 @@ const Card = styled.article`
     transform: translateY(0);
     transition: transform 500ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
-    h2 {
+    h2,
+    p {
       color: #dfe2db;
     }
     .btn {

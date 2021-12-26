@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
 import bg1 from '../../bg1.jpg';
@@ -13,44 +13,53 @@ export const Register = () => {
 
     let { email, password } = Object.fromEntries(new FormData(e.currentTarget));
 
-    register(email, password).then((result) => navigate('/'));
+    register(email, password).then((result) =>
+      navigate('/', { replace: true })
+    );
   };
 
-  const guest = (
-    <Wrapper>
-      <form method="POST" onSubmit={onRegister} className="register">
-        <h2>Create account</h2>
-        <section className="inputs">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter Email"
-            required
-          />
-        </section>
-        <section className="inputs">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter Password"
-            required
-          />
-        </section>
-        <button type="submit">Register</button>
-      </form>
-      <h5 className="hidden">
-        Already have an account? Click
-        <Link to="/login">here</Link>
-        to login.
-      </h5>
-    </Wrapper>
+  return (
+    <>
+      {
+        !user && (
+          <Wrapper>
+            <form method="POST" onSubmit={onRegister} className="register">
+              <h2>Create account</h2>
+              <section className="inputs">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter Email"
+                  required
+                />
+              </section>
+              <section className="inputs">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Enter Password"
+                  required
+                />
+              </section>
+              <button type="submit">Register</button>
+            </form>
+            <h5 className="hidden">
+              Already have an account? Click
+              <Link to="/login">here</Link>
+              to login.
+            </h5>
+          </Wrapper>
+        )
+        // : (
+        //   navigate(`/`)
+        // )
+      }
+    </>
   );
-
-  return <>{!user ? guest : <Navigate to="/" />}</>;
 };
 
 const Wrapper = styled.section`
