@@ -67,7 +67,7 @@ const Category = styled.section`
   box-shadow: 0px 20px 15px -8px black;
   background: url(${bg});
   color: #dfe2db;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 8px 8px 0;
   position: absolute;
   display: flex;
   flex-direction: column;
