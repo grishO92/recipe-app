@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { createRecipe } from '../../services/Crud';
 import { useNavigate } from 'react-router';
 import bg from '../../bg.jpg';
-// import { useState } from 'react';
+import { useUserAuth } from '../../context/UserAuthContext';
 
 export const Create = () => {
   const navigate = useNavigate();
-
+  const { user } = useUserAuth();
+  const author = user.email;
   const onRecipeCreate = (e) => {
     e.preventDefault();
     let {
@@ -32,8 +33,9 @@ export const Create = () => {
       category,
       ingredients: ingredients.split(','),
       directions,
+      author: author,
     }).then((result) => {
-      navigate('/');
+      navigate('/', { replace: true });
     });
   };
 

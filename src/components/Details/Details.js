@@ -77,7 +77,7 @@ export const Details = () => {
               </section>
             </article>
             <section className="btns">
-              {user ? (
+              {user.email === recipe.author ? (
                 <>
                   <Link className="btn edit" to={`/edit/${id}`}>
                     Edit

@@ -39,7 +39,15 @@ function App() {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/my-recipies" element={<MyRecipies />} />
+
+            <Route
+              path="/my-recipies"
+              element={
+                <ProtectedRoute>
+                  <MyRecipies />
+                </ProtectedRoute>
+              }
+            />
 
             <Route path="/details/:id" element={<Details />} />
           </Routes>
