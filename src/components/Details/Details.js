@@ -25,13 +25,13 @@ export const Details = () => {
   }, [id]);
 
   const buttonClickHandler = (e) => {
+    e.preventDefault();
+
     if (e.target.textContent === 'Delete') {
       const modal = e.target.parentNode.children[2];
       modal.style = 'display: block';
     }
-  };
 
-  const onDeleteHandler = (e) => {
     if (e.target.textContent === 'Yes') {
       deleteRecipe(id).then((result) => {
         navigate('/');
@@ -101,7 +101,7 @@ export const Details = () => {
                     <section className="bg">
                       <article className="modal">
                         <h3 className="message">Are you sure?</h3>
-                        <section onClick={onDeleteHandler} className="btns">
+                        <section className="btns">
                           <button className="btn">Yes</button>
                           <button className="btn">No</button>
                         </section>
