@@ -8,7 +8,7 @@ import { useUserAuth } from '../../context/UserAuthContext';
 export const Create = () => {
   const navigate = useNavigate();
   const { user } = useUserAuth();
-  const author = user.email;
+  const author = user.uid;
   const onRecipeCreate = (e) => {
     e.preventDefault();
     let {

@@ -24,10 +24,22 @@ export const Details = () => {
       });
   }, [id]);
 
-  const onDeleteRecipe = () => {
-    deleteRecipe(id).then((result) => {
-      navigate('/');
-    });
+  const buttonClickHandler = (e) => {
+    if (e.target.textContent === 'Delete') {
+      const modal = e.target.parentNode.children[2];
+      modal.style = 'display: block';
+    }
+  };
+
+  const onDeleteHandler = (e) => {
+    if (e.target.textContent === 'Yes') {
+      deleteRecipe(id).then((result) => {
+        navigate('/');
+      });
+    } else if (e.target.textContent === 'No') {
+      const modal = e.target.parentNode.parentNode.parentNode.parentNode;
+      modal.style = 'display: none';
+    }
   };
 
   return (
@@ -76,19 +88,26 @@ export const Details = () => {
                 </article>
               </section>
             </article>
-            <section className="btns">
-              {user.email === recipe.author ? (
+            <section onClick={buttonClickHandler} className="btns">
+              {user && user.uid === recipe.author ? (
                 <>
                   <Link className="btn edit" to={`/edit/${id}`}>
                     Edit
                   </Link>
-                  <Link
-                    onClick={onDeleteRecipe}
-                    className="btn delete"
-                    to="catalog"
-                  >
+                  <button className="btn delete" to="/">
                     Delete
-                  </Link>
+                  </button>
+                  <DeleteModal>
+                    <section className="bg">
+                      <article className="modal">
+                        <h3 className="message">Are you sure?</h3>
+                        <section onClick={onDeleteHandler} className="btns">
+                          <button className="btn">Yes</button>
+                          <button className="btn">No</button>
+                        </section>
+                      </article>
+                    </section>
+                  </DeleteModal>
                   <Link className="btn back" to="/">
                     Back
                   </Link>
@@ -111,6 +130,38 @@ export const Details = () => {
     </Wrapper>
   );
 };
+
+const DeleteModal = styled.article`
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .bg {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    .modal {
+      animation: 500ms fadeIn cubic-bezier(0.785, 0.135, 0.15, 0.86);
+      box-shadow: 0px 5px 15px 0px black;
+      background-image: url(${bg});
+      color: #dfe2db;
+      padding: 50px 80px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+`;
 
 const Wrapper = styled.section`
   display: flex;

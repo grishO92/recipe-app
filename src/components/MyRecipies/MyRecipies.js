@@ -16,13 +16,13 @@ export const MyRecipies = () => {
         setRecipies(
           data.docs
             .map((doc) => ({ ...doc.data(), id: doc.id }))
-            .filter((r) => r.author === user.email)
+            .filter((r) => r.author === user.uid)
         );
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [user.email]);
+  }, [user.uid]);
 
   const onClickHandler = (e) => {
     if (e.target.textContent === 'All') {
