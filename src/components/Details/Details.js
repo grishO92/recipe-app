@@ -27,14 +27,14 @@ export const Details = () => {
   const buttonClickHandler = (e) => {
     e.preventDefault();
 
-    if (e.target.textContent === 'Delete') {
-      const modal = e.target.parentNode.children[2];
+    if (e.target.className === 'far fa-trash-alt') {
+      const modal = e.target.parentNode.parentNode.children[2];
       modal.style = 'display: block';
     }
 
     if (e.target.textContent === 'Yes') {
       deleteRecipe(id).then((result) => {
-        navigate('/');
+        navigate('/my-recipies');
       });
     } else if (e.target.textContent === 'No') {
       const modal = e.target.parentNode.parentNode.parentNode.parentNode;
@@ -44,6 +44,39 @@ export const Details = () => {
 
   return (
     <Wrapper>
+      <section onClick={buttonClickHandler} className="btns">
+        {user && user.uid === recipe.author ? (
+          <>
+            <Link className="btn back" to="/">
+              <i className="fas fa-arrow-alt-circle-left"></i>
+            </Link>
+            <Link className="btn edit" to={`/edit/${id}`}>
+              <i className="fas fa-edit"></i>
+            </Link>
+
+            <DeleteModal>
+              <section className="bg">
+                <article className="modal">
+                  <h3 className="message">
+                    Are you sure you want to delete this recipe?
+                  </h3>
+                  <section className="btnsM">
+                    <button className="btnM">Yes</button>
+                    <button className="btnM">No</button>
+                  </section>
+                </article>
+              </section>
+            </DeleteModal>
+            <button className="btn delete">
+              <i className="far fa-trash-alt"></i>
+            </button>
+          </>
+        ) : (
+          <Link className="btn back" to="/">
+            <i className="fas fa-arrow-alt-circle-left"></i>
+          </Link>
+        )}
+      </section>
       <section className="details">
         <article className="content">
           <section className="img-wrapper">
@@ -74,50 +107,26 @@ export const Details = () => {
                 </h4>
                 <article className="prep-info">
                   <section className="prep-info-sub">
-                    <h3 className="prep-info-sub-title">Time</h3>
-                    <p> {recipe.prepTime} minutes</p>
+                    <h3 className="prep-info-sub-title">
+                      <i className="fas fa-stopwatch"></i>
+                    </h3>
+                    <p> {recipe.prepTime} min</p>
                   </section>
                   <section className="prep-info-sub">
-                    <h3 className="prep-info-sub-title">Portions</h3>
+                    <h3 className="prep-info-sub-title">
+                      <i className="fas fa-utensils"></i>
+                    </h3>
                     <p> {recipe.portions}</p>
                   </section>
                   <section className="prep-info-sub">
-                    <h3 className="prep-info-sub-title">Level</h3>
+                    <h3 className="prep-info-sub-title">
+                      <i className="fas fa-poll"></i>
+                    </h3>
                     <p> {recipe.level}</p>
                   </section>
                 </article>
               </section>
             </article>
-            <section onClick={buttonClickHandler} className="btns">
-              {user && user.uid === recipe.author ? (
-                <>
-                  <Link className="btn edit" to={`/edit/${id}`}>
-                    Edit
-                  </Link>
-                  <button className="btn delete" to="/">
-                    Delete
-                  </button>
-                  <DeleteModal>
-                    <section className="bg">
-                      <article className="modal">
-                        <h3 className="message">Are you sure?</h3>
-                        <section className="btns">
-                          <button className="btn">Yes</button>
-                          <button className="btn">No</button>
-                        </section>
-                      </article>
-                    </section>
-                  </DeleteModal>
-                  <Link className="btn back" to="/">
-                    Back
-                  </Link>
-                </>
-              ) : (
-                <Link className="btn back" to="/">
-                  Back
-                </Link>
-              )}
-            </section>
           </section>
         </article>
       </section>
@@ -159,6 +168,22 @@ const DeleteModal = styled.article`
       display: flex;
       flex-direction: column;
       gap: 20px;
+      .btnsM {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+
+        .btnM {
+          text-decoration: none;
+          padding: 0.5rem;
+          font-size: 25px;
+          border-radius: 8px;
+          border: 2px solid rgb(255, 194, 0);
+          background: rgb(255, 194, 0);
+          color: #191919;
+          cursor: pointer;
+        }
+      }
     }
   }
 `;
@@ -216,11 +241,11 @@ const Wrapper = styled.section`
           display: flex;
           flex-direction: column;
           justify-content: center;
-          gap: 2rem;
+
           .desc {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 35px;
             .title {
               font-size: 1.8rem;
             }
@@ -237,31 +262,52 @@ const Wrapper = styled.section`
             }
             .prep-info {
               display: flex;
-              justify-content: space-between;
+              gap: 40px;
+
               .prep-info-sub {
                 display: flex;
+                font-size: 25px;
                 flex-direction: column;
                 text-align: center;
-                gap: 5px;
+                gap: 10px;
+                p {
+                  font-size: 18px;
+                }
               }
             }
           }
         }
-        .btns {
-          display: flex;
-          gap: 20px;
-          justify-content: center;
-          .btn {
-            text-decoration: none;
-            padding: 0.5rem;
-            font-size: 25px;
-            border-radius: 8px;
-            border: 2px solid rgb(255, 194, 0);
-            background: rgb(255, 194, 0);
-            color: #191919;
-            cursor: pointer;
-          }
-        }
+      }
+    }
+  }
+  .btns {
+    display: flex;
+    flex-direction: row;
+    animation: 1500ms slideUp cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    box-shadow: 0px 5px 15px 0px black;
+    border-radius: 8px 8px 0 0;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-evenly;
+    background: url(${bg1});
+    width: 20%;
+    padding: 8px;
+    align-self: center;
+
+    .btn {
+      text-decoration: none;
+      padding: 0.5rem;
+      font-size: 20px;
+      border-radius: 8px;
+      color: #dfe2db;
+      background: transparent;
+      border: 2px solid transparent;
+      cursor: pointer;
+
+      &:hover {
+        border: 2px solid rgb(255, 194, 0);
+        background: rgb(255, 194, 0);
+        color: #191919;
       }
     }
   }

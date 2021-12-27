@@ -32,16 +32,16 @@ export const Header = () => {
               Create recipe
             </NavLink>
             <button className="btn" onClick={onLogout}>
-              Logout
+              <i className="fas fa-sign-out-alt"></i>
             </button>
           </>
         ) : (
           <>
             <NavLink className="btn" to="login">
-              Login
+              <i className="fas fa-sign-in-alt"></i>
             </NavLink>
             <NavLink className="btn" to="register">
-              Register
+              <i className="fas fa-user-plus"></i>
             </NavLink>
           </>
         )}

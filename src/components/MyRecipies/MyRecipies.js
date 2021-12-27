@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { RecipeCard } from '../Partial/RecipeCard';
 import { getAllRecipies } from '../../services/Crud';
 import bg from '../../bg.jpg';
-import bg1 from '../../bg1.jpg';
 import { useUserAuth } from '../../context/UserAuthContext';
 
 export const MyRecipies = () => {
@@ -25,11 +24,11 @@ export const MyRecipies = () => {
   }, [user.uid]);
 
   const onClickHandler = (e) => {
-    if (e.target.textContent === 'All') {
+    if (e.target.className === 'fas fa-border-all') {
       setFilteredRecipe(recipies);
-    } else if (e.target.textContent === 'Drinks') {
+    } else if (e.target.className === 'fas fa-glass-whiskey') {
       setFilteredRecipe(recipies.filter((x) => x.category === 'Drinks'));
-    } else if (e.target.textContent === 'Foods') {
+    } else if (e.target.className === 'fas fa-hamburger') {
       setFilteredRecipe(recipies.filter((x) => x.category === 'Foods'));
     }
   };
@@ -37,11 +36,16 @@ export const MyRecipies = () => {
   return (
     <Wrapper>
       <Aside>
-        <Under />
         <Category onClick={onClickHandler}>
-          <button className="category">All</button>
-          <button className="category">Foods</button>
-          <button className="category">Drinks</button>
+          <button className="category">
+            <i className="fas fa-border-all"></i>
+          </button>
+          <button className="category">
+            <i className="fas fa-glass-whiskey"></i>
+          </button>
+          <button className="category">
+            <i className="fas fa-hamburger"></i>
+          </button>
         </Category>
       </Aside>
       <CatalogGrid>
@@ -62,17 +66,17 @@ const CatalogGrid = styled.section`
   display: grid;
   margin: 0rem;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-auto-rows: 350px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 300px;
 `;
 
 const Category = styled.section`
-  z-index: -1;
+  z-index: 1;
   animation: 700ms slideToRight cubic-bezier(0.785, 0.135, 0.15, 0.86);
   box-shadow: 0px 20px 15px -8px black;
   background: url(${bg});
   color: #dfe2db;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 8px 8px 0;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -85,7 +89,7 @@ const Category = styled.section`
   .category {
     text-align: center;
     justify-self: center;
-    font-size: 22px;
+    font-size: 25px;
     background: transparent;
     border: none;
     padding: 7px 14px;
@@ -94,6 +98,7 @@ const Category = styled.section`
     color: #dfe2db;
 
     &:hover {
+      cursor: pointer;
       color: #191919;
       background: rgb(255, 194, 0);
     }
@@ -106,23 +111,4 @@ const Category = styled.section`
 const Aside = styled.aside`
   display: flex;
   flex-direction: column;
-`;
-
-const Under = styled.section`
-  z-index: -2;
-  animation: 1000ms slideToRight1 cubic-bezier(0.785, 0.135, 0.15, 0.86);
-  box-shadow: 0px 20px 15px -8px black;
-  background: url(${bg1});
-  color: #dfe2db;
-  border-radius: 0 0 8px 8px;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  height: 100%;
-  gap: 10px;
-  top: 0;
-  left: 0px;
 `;

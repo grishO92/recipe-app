@@ -60,5 +60,5 @@ function App() {
 export default App;
 
 const Content = styled.section`
-  margin: 150px 0 60px 0;
+  margin: 130px 0 60px 0;
 `;
