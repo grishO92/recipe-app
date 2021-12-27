@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import bg from '../../bg.jpg';
 import { logout } from '../../services/Auth';
 import { useUserAuth } from '../../context/UserAuthContext';
@@ -16,7 +16,9 @@ export const Header = () => {
 
   return (
     <NavWrapper>
-      <Logo>recipeLand</Logo>
+      <Link className="logo" to="/">
+        <Logo>recipeLand</Logo>
+      </Link>
       <NavBtns>
         <NavLink className="btn" to="/">
           Catalog
@@ -50,7 +52,6 @@ export const Header = () => {
 
 const NavWrapper = styled.header`
   animation: 700ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
-
   top: 0;
   left: 0;
   right: 0;
@@ -69,12 +70,18 @@ const NavWrapper = styled.header`
   );
   background-image: url(${bg});
   box-shadow: 0px 20px 15px -8px black;
+  .logo {
+    text-decoration: none;
+  }
 `;
 
 const Logo = styled.div`
   font-size: 40px;
   color: rgb(255, 194, 0);
   font-family: 'Lobster', cursive;
+  .logo {
+    text-decoration: none;
+  }
 `;
 
 const NavBtns = styled.nav`
