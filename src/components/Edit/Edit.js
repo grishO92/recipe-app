@@ -21,6 +21,7 @@ export const Edit = () => {
 
   const onRecipeUpdate = (e) => {
     e.preventDefault();
+
     let {
       title,
       imgUrl,
@@ -64,6 +65,7 @@ export const Edit = () => {
                     placeholder="recipe name"
                     name="title"
                     defaultValue={recipe.title}
+                    required
                   />
                 </fieldset>
                 <fieldset className="inputs">
@@ -74,6 +76,7 @@ export const Edit = () => {
                     placeholder="img URL"
                     name="imgUrl"
                     defaultValue={recipe.imgUrl}
+                    required
                   />
                 </fieldset>
               </fieldset>
@@ -86,6 +89,7 @@ export const Edit = () => {
                   placeholder="enter description"
                   name="description"
                   defaultValue={recipe.description}
+                  required
                 />
               </fieldset>
             </fieldset>
@@ -102,6 +106,7 @@ export const Edit = () => {
                       placeholder="in mins"
                       name="prepTime"
                       defaultValue={recipe.prepTime}
+                      required
                     />
                   </fieldset>
                   <fieldset className="form-group-one-left-section-second-sub-article">
@@ -113,6 +118,7 @@ export const Edit = () => {
                       placeholder="Qty"
                       name="portions"
                       defaultValue={recipe.portions}
+                      required
                     />
                   </fieldset>
                 </fieldset>
@@ -170,6 +176,7 @@ export const Edit = () => {
                   placeholder="ingredients"
                   name="ingredients"
                   defaultValue={recipe.ingredients}
+                  required
                 />
               </fieldset>
             </fieldset>
@@ -184,6 +191,7 @@ export const Edit = () => {
               placeholder="directions"
               name="directions"
               defaultValue={recipe.directions}
+              required
             />
           </fieldset>
         </fieldset>

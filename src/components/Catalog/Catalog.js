@@ -30,20 +30,17 @@ export const Catalog = () => {
 
   return (
     <Wrapper>
-      <Aside>
-        {/* <Under /> */}
-        <Category onClick={onClickHandler}>
-          <button className="category">
-            <i className="fas fa-border-all"></i>
-          </button>
-          <button className="category">
-            <i className="fas fa-glass-whiskey"></i>
-          </button>
-          <button className="category">
-            <i className="fas fa-hamburger"></i>
-          </button>
-        </Category>
-      </Aside>
+      <Category onClick={onClickHandler}>
+        <button className="category">
+          <i className="fas fa-border-all"></i>
+        </button>
+        <button className="category">
+          <i className="fas fa-glass-whiskey"></i>
+        </button>
+        <button className="category">
+          <i className="fas fa-hamburger"></i>
+        </button>
+      </Category>
       <CatalogGrid>
         {filteredRecipe.length <= 0
           ? recipies.map((x) => <RecipeCard key={x.id} recipe={x} />)
@@ -66,8 +63,9 @@ const CatalogGrid = styled.section`
   grid-auto-rows: 300px;
 `;
 
-const Category = styled.section`
+const Category = styled.aside`
   z-index: 1;
+  float: left;
   animation: 700ms slideToRight cubic-bezier(0.785, 0.135, 0.15, 0.86);
   box-shadow: 0px 20px 15px -8px black;
   background: url(${bg});
@@ -88,42 +86,20 @@ const Category = styled.section`
     justify-self: center;
     background: transparent;
     border: none;
-    cursor: pointer;
+
     padding: 7px 14px;
     border-radius: 8px;
     text-decoration: none;
     color: #dfe2db;
 
     &:hover {
-      color: #191919;
-      background: rgb(255, 194, 0);
+      cursor: pointer;
+      color: rgb(255, 194, 0);
+      transform: scale(1);
     }
-    &[aria-current] {
-      color: #191919;
-      background: rgb(255, 194, 0);
+    &:focus {
+      transform: scale(1.4);
+      color: rgb(255, 194, 0);
     }
   }
 `;
-const Aside = styled.aside`
-  display: flex;
-  flex-direction: column;
-`;
-
-// const Under = styled.section`
-//   z-index: -2;
-//   animation: 1000ms slideToRight1 cubic-bezier(0.785, 0.135, 0.15, 0.86);
-//   box-shadow: 0px 20px 15px -8px black;
-//   background: url(${bg1});
-//   color: #dfe2db;
-//   /* border-radius: 0 0 8px 8px; */
-//   position: absolute;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 15px;
-//   height: 100vh;
-//   gap: 10px;
-//   top: 0;
-//   left: 0px;
-// `;

@@ -4,13 +4,19 @@ import { createRecipe } from '../../services/Crud';
 import { useNavigate } from 'react-router';
 import bg from '../../bg.jpg';
 import { useUserAuth } from '../../context/UserAuthContext';
+import { useState } from 'react';
 
 export const Create = () => {
   const navigate = useNavigate();
   const { user } = useUserAuth();
   const author = user.uid;
-  const onRecipeCreate = (e) => {
+
+  const [errors, setErrors] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const onRecipeCreate = async (e) => {
     e.preventDefault();
+
     let {
       title,
       imgUrl,
@@ -23,26 +29,54 @@ export const Create = () => {
       directions,
     } = Object.fromEntries(new FormData(e.currentTarget));
 
-    createRecipe({
-      title,
-      imgUrl,
-      description,
-      prepTime,
-      portions,
-      level,
-      category,
-      ingredients: ingredients.split(','),
-      directions,
-      author: author,
-    }).then((result) => {
-      navigate('/', { replace: true });
-    });
+    try {
+      setErrors('');
+      setLoading(true);
+
+      await createRecipe({
+        title,
+        imgUrl,
+        description,
+        prepTime,
+        portions,
+        level,
+        category,
+        ingredients: ingredients.split(','),
+        directions,
+        author: author,
+      });
+      navigate('/my-recipies', { replace: true });
+    } catch {
+      if (!title) {
+        setErrors('Title is required!');
+      }
+      if (!imgUrl) {
+        setErrors('Image url is required!');
+      }
+      if (!description) {
+        setErrors('Description is required!');
+      }
+      if (!prepTime) {
+        setErrors('Preparation time is required!');
+      }
+      if (!portions) {
+        setErrors('Portions is required!');
+      }
+      if (!ingredients) {
+        setErrors('Ingredients is required!');
+      }
+      if (!directions) {
+        setErrors('Directions is required!');
+      }
+    }
+    setLoading(false);
   };
 
   return (
     <Wrapper>
       <form onSubmit={onRecipeCreate} method="POST" className="create">
         <h2>Create recipe</h2>
+        {errors && <p className="error">{errors}</p>}
         <fieldset className="form-groups">
           <fieldset className="form-group-one">
             <fieldset className="form-group-one-left-section">
@@ -54,6 +88,7 @@ export const Create = () => {
                     id="title"
                     placeholder="recipe name"
                     name="title"
+                    required
                   />
                 </fieldset>
                 <fieldset className="inputs">
@@ -63,6 +98,7 @@ export const Create = () => {
                     id="imgUrl"
                     placeholder="img URL"
                     name="imgUrl"
+                    required
                   />
                 </fieldset>
               </fieldset>
@@ -74,6 +110,7 @@ export const Create = () => {
                   id="description"
                   placeholder="enter description"
                   name="description"
+                  required
                 />
               </fieldset>
             </fieldset>
@@ -89,6 +126,7 @@ export const Create = () => {
                       id="prepTime"
                       placeholder="in mins"
                       name="prepTime"
+                      required
                     />
                   </fieldset>
                   <fieldset className="form-group-one-left-section-second-sub-article">
@@ -99,6 +137,7 @@ export const Create = () => {
                       id="portions"
                       placeholder="Qty"
                       name="portions"
+                      required
                     />
                   </fieldset>
                 </fieldset>
@@ -139,6 +178,7 @@ export const Create = () => {
                   id="ingredients"
                   placeholder="separated by coma"
                   name="ingredients"
+                  required
                 />
               </fieldset>
             </fieldset>
@@ -152,12 +192,13 @@ export const Create = () => {
               id="directions"
               placeholder="directions"
               name="directions"
+              required
             />
           </fieldset>
         </fieldset>
 
         <fieldset className="form-buttons">
-          <button className="form-button" type="submit">
+          <button disabled={loading} className="form-button" type="submit">
             Create
           </button>
           <Link className="form-button" to="/">

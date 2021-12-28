@@ -305,9 +305,11 @@ const Wrapper = styled.section`
       cursor: pointer;
 
       &:hover {
-        border: 2px solid rgb(255, 194, 0);
-        background: rgb(255, 194, 0);
-        color: #191919;
+        color: rgb(255, 194, 0);
+        transform: scale(1.5);
+      }
+      &:focus.delete {
+        color: crimson;
       }
     }
   }

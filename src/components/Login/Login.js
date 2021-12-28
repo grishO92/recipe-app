@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
@@ -9,12 +10,40 @@ export const Login = () => {
   const navigate = useNavigate();
   const { user } = useUserAuth();
 
-  const onLogin = (e) => {
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const formErrors = {};
+
+  const onLogin = async (e) => {
     e.preventDefault();
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     let { email, password } = Object.fromEntries(new FormData(e.currentTarget));
 
-    login(email, password).then((result) => navigate('/', { replace: true }));
+    try {
+      setErrors({});
+      setLoading(true);
+
+      await login(email, password);
+      navigate('/', { replace: true });
+    } catch {
+      if (!email) {
+        formErrors.email = 'Email is required!';
+      } else if (!regex.test(email)) {
+        formErrors.email = 'This is not a valid email!';
+      }
+
+      if (!password) {
+        formErrors.password = 'Password is required!';
+      } else if (password.length < 6) {
+        formErrors.password = 'Password is less than 6 characters!';
+      } else if (password.length > 15) {
+        formErrors.password = "Password can't be more than 15 characters!";
+      }
+      setErrors(formErrors);
+    }
+    setLoading(false);
   };
 
   return (
@@ -27,12 +56,12 @@ export const Login = () => {
               <section className="inputs">
                 <label htmlFor="email">Email</label>
                 <input
-                  type="email"
+                  type="text"
                   name="email"
                   id="email"
                   placeholder="Enter Email"
-                  required
                 />
+                {errors && <p className="error">{errors.email}</p>}
               </section>
               <section className="inputs">
                 <label htmlFor="password">Password</label>
@@ -41,10 +70,12 @@ export const Login = () => {
                   name="password"
                   id="password"
                   placeholder="Enter Password"
-                  required
                 />
+                {errors && <p className="error">{errors.password}</p>}
               </section>
-              <button type="submit">Log in</button>
+              <button disabled={loading} type="submit">
+                Log in
+              </button>
             </form>
             <h5 className="hidden">
               Don't have an account? Click
