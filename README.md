@@ -2,6 +2,13 @@
 
 An app for your favorite recipies!
 
+## Build with
+
+- React.js
+- react router v6
+- styled components
+- firebase
+
 ## App functionality
 
 #### Guest functionality
@@ -17,7 +24,7 @@ An app for your favorite recipies!
 - create, edit, delete own recipies
 - like other users recipies
 
-## Available Scripts
+## What to do to start the project?
 
 In the project directory, you can run:
 
