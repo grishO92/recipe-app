@@ -5,6 +5,7 @@ import bg from '../../bg.jpg';
 import bg1 from '../../bg1.jpg';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { login } from '../../services/Auth';
+import { Page404 } from '../404/Page404';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -48,46 +49,43 @@ export const Login = () => {
 
   return (
     <>
-      {
-        !user && (
-          <Wrapper>
-            <form method="POST" onSubmit={onLogin} className="login">
-              <h2>Login into account</h2>
-              <section className="inputs">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Enter Email"
-                />
-              </section>
-              {errors && <p className="error">{errors.email}</p>}
-              <section className="inputs">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Enter Password"
-                />
-              </section>
-              {errors && <p className="error">{errors.password}</p>}
-              <button disabled={loading} type="submit">
-                Log in
-              </button>
-            </form>
-            <h5 className="hidden">
-              Don't have an account? Click
-              <Link to="/register">here</Link>
-              to register.
-            </h5>
-          </Wrapper>
-        )
-        // : (
-        //   navigate('/', { replace: true })
-        // )
-      }
+      {!user ? (
+        <Wrapper>
+          <form method="POST" onSubmit={onLogin} className="login">
+            <h2>Login into account</h2>
+            <section className="inputs">
+              <label htmlFor="email">Email</label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Enter Email"
+              />
+            </section>
+            {errors && <p className="error">{errors.email}</p>}
+            <section className="inputs">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter Password"
+              />
+            </section>
+            {errors && <p className="error">{errors.password}</p>}
+            <button disabled={loading} type="submit">
+              Log in
+            </button>
+          </form>
+          <h5 className="hidden">
+            Don't have an account? Click
+            <Link to="/register">here</Link>
+            to register.
+          </h5>
+        </Wrapper>
+      ) : (
+        <Page404 />
+      )}
     </>
   );
 };

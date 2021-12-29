@@ -7,13 +7,26 @@ import bg1 from '../../bg1.jpg';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { db } from '../../firebaseConfig';
 
-import { deleteRecipe, addLike } from '../../services/Crud';
+import { deleteRecipe, addLike, getAllRecipies } from '../../services/Crud';
+import { Page404 } from '../404/Page404';
 
 export const Details = () => {
   const [recipe, setRecipe] = useState([]);
+  const [recipies, setRecipies] = useState([]);
+
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useUserAuth();
+
+  useEffect(() => {
+    getAllRecipies()
+      .then((data) => {
+        setRecipies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     onSnapshot(doc(db, 'recipies', id), (doc) => {
@@ -46,120 +59,126 @@ export const Details = () => {
   };
 
   return (
-    <Wrapper>
-      <section onClick={buttonClickHandler} className="btns">
-        {user && user.uid === recipe?.author ? (
-          <>
-            <Link className="btn back" to="/">
-              <i className="fas fa-arrow-alt-circle-left"></i>
-            </Link>
-            <Link className="btn edit" to={`/edit/${id}`}>
-              <i className="fas fa-edit"></i>
-            </Link>
+    <>
+      {recipies.some((recipe) => recipe.id === id) ? (
+        <Wrapper>
+          <section onClick={buttonClickHandler} className="btns">
+            {user && user.uid === recipe?.author ? (
+              <>
+                <Link className="btn back" to="/">
+                  <i className="fas fa-arrow-alt-circle-left"></i>
+                </Link>
+                <Link className="btn edit" to={`/edit/${id}`}>
+                  <i className="fas fa-edit"></i>
+                </Link>
 
-            <DeleteModal>
-              <section className="bg">
-                <article className="modal">
-                  <h3 className="message">
-                    Are you sure you want to delete this recipe?
-                  </h3>
-                  <section className="btnsM">
-                    <button className="btnM">Yes</button>
-                    <button className="btnM">No</button>
+                <DeleteModal>
+                  <section className="bg">
+                    <article className="modal">
+                      <h3 className="message">
+                        Are you sure you want to delete this recipe?
+                      </h3>
+                      <section className="btnsM">
+                        <button className="btnM">Yes</button>
+                        <button className="btnM">No</button>
+                      </section>
+                    </article>
                   </section>
-                </article>
-              </section>
-            </DeleteModal>
+                </DeleteModal>
 
-            <button className="btn delete">
-              <i className="far fa-trash-alt"></i>
-            </button>
-            <i className="likes far fa-thumbs-up">
-              {' '}
-              {recipe?.likes?.length ? recipe?.likes?.length : 0}
-            </i>
-          </>
-        ) : (
-          <>
-            <Link className="btn back" to="/">
-              <i className="fas fa-arrow-alt-circle-left"></i>
-            </Link>
-            {user ? (
-              <button className="btn delete">
-                <i className="far fa-thumbs-up">
+                <button className="btn delete">
+                  <i className="far fa-trash-alt"></i>
+                </button>
+                <i className="likes far fa-thumbs-up">
                   {' '}
                   {recipe?.likes?.length ? recipe?.likes?.length : 0}
                 </i>
-              </button>
+              </>
             ) : (
-              <i className="likes far fa-thumbs-up">
-                {' '}
-                {recipe?.likes?.length ? recipe?.likes?.length : 0}
-              </i>
+              <>
+                <Link className="btn back" to="/">
+                  <i className="fas fa-arrow-alt-circle-left"></i>
+                </Link>
+                {user ? (
+                  <button className="btn delete">
+                    <i className="far fa-thumbs-up">
+                      {' '}
+                      {recipe?.likes?.length ? recipe?.likes?.length : 0}
+                    </i>
+                  </button>
+                ) : (
+                  <i className="likes far fa-thumbs-up">
+                    {' '}
+                    {recipe?.likes?.length ? recipe?.likes?.length : 0}
+                  </i>
+                )}
+              </>
             )}
-          </>
-        )}
-      </section>
-      <section className="details">
-        <article className="content">
-          <section className="img-wrapper">
-            <img className="img" src={recipe?.imgUrl} alt="detail" />
           </section>
-          <section className="card">
-            <h2>Details</h2>
+          <section className="details">
+            <article className="content">
+              <section className="img-wrapper">
+                <img className="img" src={recipe?.imgUrl} alt="detail" />
+              </section>
+              <section className="card">
+                <h2>Details</h2>
 
-            <article className="detail-grid">
-              <section className="desc">
-                <h3 className="title">
-                  <span>title: </span>
-                  {recipe?.title}
-                </h3>
-                <h3 className="category">
-                  <span>category: </span>
-                  {recipe?.category}
-                </h3>
-                <h3 className="description">
-                  <span>description: </span>
-                  {recipe?.description}
-                </h3>
-                <ul>
-                  <h4>Recipe:</h4>
-                  {recipe?.ingredients?.map((x) => (
-                    <li key={x}>{x}</li>
-                  ))}
-                </ul>
-                <article className="prep-info">
-                  <section className="prep-info-sub">
-                    <h3 className="prep-info-sub-title">
-                      <i className="fas fa-stopwatch"></i>
+                <article className="detail-grid">
+                  <section className="desc">
+                    <h3 className="title">
+                      <span>title: </span>
+                      {recipe?.title}
                     </h3>
-                    <p> {recipe?.prepTime} min</p>
-                  </section>
-                  <section className="prep-info-sub">
-                    <h3 className="prep-info-sub-title">
-                      <i className="fas fa-utensils"></i>
+                    <h3 className="category">
+                      <span>category: </span>
+                      {recipe?.category}
                     </h3>
-                    <p> {recipe?.portions}</p>
-                  </section>
-                  <section className="prep-info-sub">
-                    <h3 className="prep-info-sub-title">
-                      <i className="fas fa-poll"></i>
+                    <h3 className="description">
+                      <span>description: </span>
+                      {recipe?.description}
                     </h3>
-                    <p> {recipe?.level}</p>
+                    <ul>
+                      <h4>Recipe:</h4>
+                      {recipe?.ingredients?.map((x) => (
+                        <li key={x}>{x}</li>
+                      ))}
+                    </ul>
+                    <article className="prep-info">
+                      <section className="prep-info-sub">
+                        <h3 className="prep-info-sub-title">
+                          <i className="fas fa-stopwatch"></i>
+                        </h3>
+                        <p> {recipe?.prepTime} min</p>
+                      </section>
+                      <section className="prep-info-sub">
+                        <h3 className="prep-info-sub-title">
+                          <i className="fas fa-utensils"></i>
+                        </h3>
+                        <p> {recipe?.portions}</p>
+                      </section>
+                      <section className="prep-info-sub">
+                        <h3 className="prep-info-sub-title">
+                          <i className="fas fa-poll"></i>
+                        </h3>
+                        <p> {recipe?.level}</p>
+                      </section>
+                    </article>
                   </section>
                 </article>
               </section>
             </article>
           </section>
-        </article>
-      </section>
-      <section className="how-to-prep">
-        <section className="how-to-desc">
-          <h3 className="how-to">How to prepare?</h3>
-          <p className="how-to-info">{recipe?.directions}</p>
-        </section>
-      </section>
-    </Wrapper>
+          <section className="how-to-prep">
+            <section className="how-to-desc">
+              <h3 className="how-to">How to prepare?</h3>
+              <p className="how-to-info">{recipe?.directions}</p>
+            </section>
+          </section>
+        </Wrapper>
+      ) : (
+        <Page404 />
+      )}
+    </>
   );
 };
 

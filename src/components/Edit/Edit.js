@@ -3,8 +3,11 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
 import { getRecipeById, updateRecipe } from '../../services/Crud';
+import { useUserAuth } from '../../context/UserAuthContext';
+import { Page404 } from '../404/Page404';
 
 export const Edit = () => {
+  const { user } = useUserAuth();
   const [recipe, setRecipe] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -49,162 +52,168 @@ export const Edit = () => {
   };
 
   return (
-    <Wrapper>
-      <form onSubmit={onRecipeUpdate} method="PUT" className="edit">
-        <h2>Edit recipe</h2>
-        <fieldset className="form-groups">
-          <fieldset className="form-group-one">
-            <fieldset className="form-group-one-left-section">
-              <fieldset className="form-group-one-left-section-first">
-                <fieldset className="inputs">
-                  <label htmlFor="title">Title</label>
-                  <input
-                    type="text"
-                    id="title"
-                    placeholder="recipe name"
-                    name="title"
-                    defaultValue={recipe.title}
-                    required
-                  />
+    <>
+      {user.uid === recipe.author ? (
+        <Wrapper>
+          <form onSubmit={onRecipeUpdate} method="PUT" className="edit">
+            <h2>Edit recipe</h2>
+            <fieldset className="form-groups">
+              <fieldset className="form-group-one">
+                <fieldset className="form-group-one-left-section">
+                  <fieldset className="form-group-one-left-section-first">
+                    <fieldset className="inputs">
+                      <label htmlFor="title">Title</label>
+                      <input
+                        type="text"
+                        id="title"
+                        placeholder="recipe name"
+                        name="title"
+                        defaultValue={recipe.title}
+                        required
+                      />
+                    </fieldset>
+                    <fieldset className="inputs">
+                      <label htmlFor="imgUrl">Image</label>
+                      <input
+                        type="text"
+                        id="imgUrl"
+                        placeholder="img URL"
+                        name="imgUrl"
+                        defaultValue={recipe.imgUrl}
+                        required
+                      />
+                    </fieldset>
+                  </fieldset>
+                  <fieldset className="inputs">
+                    <label htmlFor="description">Description</label>
+                    <textarea
+                      rows="4"
+                      type="text"
+                      id="description"
+                      placeholder="enter description"
+                      name="description"
+                      defaultValue={recipe.description}
+                      required
+                    />
+                  </fieldset>
                 </fieldset>
-                <fieldset className="inputs">
-                  <label htmlFor="imgUrl">Image</label>
-                  <input
-                    type="text"
-                    id="imgUrl"
-                    placeholder="img URL"
-                    name="imgUrl"
-                    defaultValue={recipe.imgUrl}
-                    required
-                  />
+
+                <fieldset className="form-group-one-right-section">
+                  <fieldset className="form-group-one-left-section-second">
+                    <fieldset className="form-group-one-left-section-second-sub">
+                      <fieldset className="form-group-one-left-section-second-sub-article">
+                        <label htmlFor="prepTime">Prep time</label>
+                        <input
+                          className="form-group-one-left-section-second-sub-article-input"
+                          type="number"
+                          id="prepTime"
+                          placeholder="in mins"
+                          name="prepTime"
+                          defaultValue={recipe.prepTime}
+                          required
+                        />
+                      </fieldset>
+                      <fieldset className="form-group-one-left-section-second-sub-article">
+                        <label htmlFor="portions">Portions</label>
+                        <input
+                          className="form-group-one-left-section-second-sub-article-input"
+                          type="number"
+                          id="portions"
+                          placeholder="Qty"
+                          name="portions"
+                          defaultValue={recipe.portions}
+                          required
+                        />
+                      </fieldset>
+                    </fieldset>
+                    <fieldset className="form-group-one-left-section-second-sub">
+                      <fieldset className="form-group-one-left-section-second-sub-article">
+                        <label htmlFor="level">Difficulty</label>
+                        <select
+                          className="form-group-one-left-section-second-sub-article-input"
+                          id="level"
+                          name="level"
+                        >
+                          <option>{recipe.level}</option>
+                          {recipe.level === 'Easy' ? (
+                            <>
+                              <option>Medium</option>
+                              <option>Hard</option>
+                            </>
+                          ) : recipe.level === 'Medium' ? (
+                            <>
+                              <option>Easy</option>
+                              <option>Hard</option>
+                            </>
+                          ) : (
+                            <>
+                              <option>Easy</option>
+                              <option>Medium</option>
+                            </>
+                          )}
+                        </select>
+                      </fieldset>
+
+                      <fieldset className="form-group-one-left-section-second-sub-article">
+                        <label htmlFor="category">Category</label>
+                        <select
+                          className="form-group-one-left-section-second-sub-article-input"
+                          id="category"
+                          name="category"
+                        >
+                          <option>{recipe.category}</option>
+                          {recipe.category === 'Foods' ? (
+                            <option>Drinks</option>
+                          ) : (
+                            <option>Foods</option>
+                          )}
+                        </select>
+                      </fieldset>
+                    </fieldset>
+                  </fieldset>
+                  <fieldset className="inputs">
+                    <label htmlFor="ingredients">Ingredients</label>
+                    <textarea
+                      rows="4"
+                      type="text"
+                      id="ingredients"
+                      placeholder="ingredients"
+                      name="ingredients"
+                      defaultValue={recipe.ingredients}
+                      required
+                    />
+                  </fieldset>
                 </fieldset>
               </fieldset>
-              <fieldset className="inputs">
-                <label htmlFor="description">Description</label>
+
+              <fieldset className="form-group-two">
+                <label htmlFor="directions">Directions</label>
                 <textarea
                   rows="4"
                   type="text"
-                  id="description"
-                  placeholder="enter description"
-                  name="description"
-                  defaultValue={recipe.description}
+                  id="directions"
+                  placeholder="directions"
+                  name="directions"
+                  defaultValue={recipe.directions}
                   required
                 />
               </fieldset>
             </fieldset>
 
-            <fieldset className="form-group-one-right-section">
-              <fieldset className="form-group-one-left-section-second">
-                <fieldset className="form-group-one-left-section-second-sub">
-                  <fieldset className="form-group-one-left-section-second-sub-article">
-                    <label htmlFor="prepTime">Prep time</label>
-                    <input
-                      className="form-group-one-left-section-second-sub-article-input"
-                      type="number"
-                      id="prepTime"
-                      placeholder="in mins"
-                      name="prepTime"
-                      defaultValue={recipe.prepTime}
-                      required
-                    />
-                  </fieldset>
-                  <fieldset className="form-group-one-left-section-second-sub-article">
-                    <label htmlFor="portions">Portions</label>
-                    <input
-                      className="form-group-one-left-section-second-sub-article-input"
-                      type="number"
-                      id="portions"
-                      placeholder="Qty"
-                      name="portions"
-                      defaultValue={recipe.portions}
-                      required
-                    />
-                  </fieldset>
-                </fieldset>
-                <fieldset className="form-group-one-left-section-second-sub">
-                  <fieldset className="form-group-one-left-section-second-sub-article">
-                    <label htmlFor="level">Difficulty</label>
-                    <select
-                      className="form-group-one-left-section-second-sub-article-input"
-                      id="level"
-                      name="level"
-                    >
-                      <option>{recipe.level}</option>
-                      {recipe.level === 'Easy' ? (
-                        <>
-                          <option>Medium</option>
-                          <option>Hard</option>
-                        </>
-                      ) : recipe.level === 'Medium' ? (
-                        <>
-                          <option>Easy</option>
-                          <option>Hard</option>
-                        </>
-                      ) : (
-                        <>
-                          <option>Easy</option>
-                          <option>Medium</option>
-                        </>
-                      )}
-                    </select>
-                  </fieldset>
-
-                  <fieldset className="form-group-one-left-section-second-sub-article">
-                    <label htmlFor="category">Category</label>
-                    <select
-                      className="form-group-one-left-section-second-sub-article-input"
-                      id="category"
-                      name="category"
-                    >
-                      <option>{recipe.category}</option>
-                      {recipe.category === 'Foods' ? (
-                        <option>Drinks</option>
-                      ) : (
-                        <option>Foods</option>
-                      )}
-                    </select>
-                  </fieldset>
-                </fieldset>
-              </fieldset>
-              <fieldset className="inputs">
-                <label htmlFor="ingredients">Ingredients</label>
-                <textarea
-                  rows="4"
-                  type="text"
-                  id="ingredients"
-                  placeholder="ingredients"
-                  name="ingredients"
-                  defaultValue={recipe.ingredients}
-                  required
-                />
-              </fieldset>
+            <fieldset className="form-buttons">
+              <button className="form-button" type="submit">
+                Edit
+              </button>
+              <Link className="form-button" to={`/details/${id}`}>
+                Cancel
+              </Link>
             </fieldset>
-          </fieldset>
-
-          <fieldset className="form-group-two">
-            <label htmlFor="directions">Directions</label>
-            <textarea
-              rows="4"
-              type="text"
-              id="directions"
-              placeholder="directions"
-              name="directions"
-              defaultValue={recipe.directions}
-              required
-            />
-          </fieldset>
-        </fieldset>
-
-        <fieldset className="form-buttons">
-          <button className="form-button" type="submit">
-            Edit
-          </button>
-          <Link className="form-button" to={`/details/${id}`}>
-            Cancel
-          </Link>
-        </fieldset>
-      </form>
-    </Wrapper>
+          </form>
+        </Wrapper>
+      ) : (
+        <Page404 />
+      )}
+    </>
   );
 };
 
