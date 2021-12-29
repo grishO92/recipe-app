@@ -15,45 +15,43 @@ import { ProtectedRoute } from './components/util/ProtectedRoute';
 
 function App() {
   return (
-    <>
-      <UserAuthContextProvider>
-        <Header />
-        <Content>
-          <Routes>
-            <Route path="/" element={<Catalog />} />
-            <Route
-              path="/create"
-              element={
-                <ProtectedRoute>
-                  <Create />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/edit/:id"
-              element={
-                <ProtectedRoute>
-                  <Edit />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+    <UserAuthContextProvider>
+      <Header />
+      <Content>
+        <Routes>
+          <Route path="/" element={<Catalog />} />
+          <Route
+            path="/create"
+            element={
+              <ProtectedRoute>
+                <Create />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/edit/:id"
+            element={
+              <ProtectedRoute>
+                <Edit />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-            <Route
-              path="/my-recipies"
-              element={
-                <ProtectedRoute>
-                  <MyRecipies />
-                </ProtectedRoute>
-              }
-            />
+          <Route
+            path="/my-recipies"
+            element={
+              <ProtectedRoute>
+                <MyRecipies />
+              </ProtectedRoute>
+            }
+          />
 
-            <Route path="/details/:id" element={<Details />} />
-          </Routes>
-        </Content>
-      </UserAuthContextProvider>
-    </>
+          <Route path="/details/:id" element={<Details />} />
+        </Routes>
+      </Content>
+    </UserAuthContextProvider>
   );
 }
 

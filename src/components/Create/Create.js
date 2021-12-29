@@ -44,6 +44,7 @@ export const Create = () => {
         ingredients: ingredients.split(','),
         directions,
         author: author,
+        likes: [],
       });
       navigate('/my-recipies', { replace: true });
     } catch {

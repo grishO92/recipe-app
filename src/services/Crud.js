@@ -4,6 +4,7 @@ import {
   getDocs,
   addDoc,
   doc,
+  arrayUnion,
   getDoc,
   updateDoc,
   deleteDoc,
@@ -24,11 +25,18 @@ export const createRecipe = async (data) => {
 };
 
 export const updateRecipe = async (id, data) => {
-  const recipe = await doc(db, 'recipies', id);
+  const recipe = doc(db, 'recipies', id);
   await updateDoc(recipe, data);
 };
 
 export const deleteRecipe = async (id) => {
-  const recipe = await doc(db, 'recipies', id);
+  const recipe = doc(db, 'recipies', id);
   await deleteDoc(recipe);
+};
+
+export const addLike = async (id, userId) => {
+  const recipe = doc(db, 'recipies', id);
+  await updateDoc(recipe, {
+    likes: arrayUnion(userId),
+  });
 };

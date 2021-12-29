@@ -1,32 +1,35 @@
+import { doc, onSnapshot } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../../bg.jpg';
 import bg1 from '../../bg1.jpg';
 import { useUserAuth } from '../../context/UserAuthContext';
+import { db } from '../../firebaseConfig';
 
-import { deleteRecipe, getRecipeById } from '../../services/Crud';
+import { deleteRecipe, addLike } from '../../services/Crud';
 
 export const Details = () => {
   const [recipe, setRecipe] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-
   const { user } = useUserAuth();
 
   useEffect(() => {
-    getRecipeById(id)
-      .then((doc) => {
-        setRecipe(doc.data());
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    onSnapshot(doc(db, 'recipies', id), (doc) => {
+      setRecipe(doc.data());
+    });
   }, [id]);
 
   const buttonClickHandler = (e) => {
     e.preventDefault();
 
+    if (e.target.className === 'far fa-thumbs-up') {
+      if (recipe.likes?.includes(user.uid)) {
+        e.target.style = 'color: white';
+      }
+      addLike(id, user.uid);
+    }
     if (e.target.className === 'far fa-trash-alt') {
       const modal = e.target.parentNode.parentNode.children[2];
       modal.style = 'display: block';
@@ -45,7 +48,7 @@ export const Details = () => {
   return (
     <Wrapper>
       <section onClick={buttonClickHandler} className="btns">
-        {user && user.uid === recipe.author ? (
+        {user && user.uid === recipe?.author ? (
           <>
             <Link className="btn back" to="/">
               <i className="fas fa-arrow-alt-circle-left"></i>
@@ -67,20 +70,40 @@ export const Details = () => {
                 </article>
               </section>
             </DeleteModal>
+
             <button className="btn delete">
               <i className="far fa-trash-alt"></i>
             </button>
+            <i className="likes far fa-thumbs-up">
+              {' '}
+              {recipe?.likes?.length ? recipe?.likes?.length : 0}
+            </i>
           </>
         ) : (
-          <Link className="btn back" to="/">
-            <i className="fas fa-arrow-alt-circle-left"></i>
-          </Link>
+          <>
+            <Link className="btn back" to="/">
+              <i className="fas fa-arrow-alt-circle-left"></i>
+            </Link>
+            {user ? (
+              <button className="btn delete">
+                <i className="far fa-thumbs-up">
+                  {' '}
+                  {recipe?.likes?.length ? recipe?.likes?.length : 0}
+                </i>
+              </button>
+            ) : (
+              <i className="likes far fa-thumbs-up">
+                {' '}
+                {recipe?.likes?.length ? recipe?.likes?.length : 0}
+              </i>
+            )}
+          </>
         )}
       </section>
       <section className="details">
         <article className="content">
           <section className="img-wrapper">
-            <img className="img" src={recipe.imgUrl} alt="detail" />
+            <img className="img" src={recipe?.imgUrl} alt="detail" />
           </section>
           <section className="card">
             <h2>Details</h2>
@@ -89,40 +112,40 @@ export const Details = () => {
               <section className="desc">
                 <h3 className="title">
                   <span>title: </span>
-                  {recipe.title}
+                  {recipe?.title}
                 </h3>
-                <h3 className="author">
-                  <span>Category: </span>
-                  {recipe.category}
+                <h3 className="category">
+                  <span>category: </span>
+                  {recipe?.category}
                 </h3>
-                <p className="Description">
+                <h3 className="description">
                   <span>description: </span>
-                  {recipe.description}
-                </p>
-                <h4>
-                  Recipe:
-                  {recipe.ingredients?.map((x) => (
+                  {recipe?.description}
+                </h3>
+                <ul>
+                  <h4>Recipe:</h4>
+                  {recipe?.ingredients?.map((x) => (
                     <li key={x}>{x}</li>
                   ))}
-                </h4>
+                </ul>
                 <article className="prep-info">
                   <section className="prep-info-sub">
                     <h3 className="prep-info-sub-title">
                       <i className="fas fa-stopwatch"></i>
                     </h3>
-                    <p> {recipe.prepTime} min</p>
+                    <p> {recipe?.prepTime} min</p>
                   </section>
                   <section className="prep-info-sub">
                     <h3 className="prep-info-sub-title">
                       <i className="fas fa-utensils"></i>
                     </h3>
-                    <p> {recipe.portions}</p>
+                    <p> {recipe?.portions}</p>
                   </section>
                   <section className="prep-info-sub">
                     <h3 className="prep-info-sub-title">
                       <i className="fas fa-poll"></i>
                     </h3>
-                    <p> {recipe.level}</p>
+                    <p> {recipe?.level}</p>
                   </section>
                 </article>
               </section>
@@ -133,7 +156,7 @@ export const Details = () => {
       <section className="how-to-prep">
         <section className="how-to-desc">
           <h3 className="how-to">How to prepare?</h3>
-          <p className="how-to-info">{recipe.directions}</p>
+          <p className="how-to-info">{recipe?.directions}</p>
         </section>
       </section>
     </Wrapper>
@@ -247,17 +270,18 @@ const Wrapper = styled.section`
             flex-direction: column;
             gap: 35px;
             .title {
-              font-size: 1.8rem;
+              font-size: 25px;
             }
-            .author {
-              font-size: 1.5rem;
+            .category {
+              font-size: 25px;
             }
-            span {
-              font-size: 1.3rem;
-              font-style: normal;
+            span,
+            h4 {
+              font-size: 22px;
+              font-weight: 300;
             }
-            .recipe li {
-              margin-left: 1.2rem;
+            li {
+              font-weight: 600;
               list-style: circle;
             }
             .prep-info {
@@ -290,9 +314,14 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: space-evenly;
     background: url(${bg1});
-    width: 20%;
+    width: 25%;
     padding: 8px;
     align-self: center;
+
+    .likes {
+      color: #dfe2db;
+      font-size: 25px;
+    }
 
     .btn {
       text-decoration: none;

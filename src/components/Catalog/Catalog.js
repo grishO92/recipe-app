@@ -41,16 +41,27 @@ export const Catalog = () => {
           <i className="fas fa-hamburger"></i>
         </button>
       </Category>
-      <CatalogGrid>
-        {filteredRecipe.length <= 0
-          ? recipies.map((x) => <RecipeCard key={x.id} recipe={x} />)
-          : filteredRecipe.map((x) => <RecipeCard key={x.id} recipe={x} />)}
-      </CatalogGrid>
+      {recipies.length === 0 ? (
+        <h1 className="empty">No recipies available!</h1>
+      ) : (
+        <CatalogGrid>
+          {filteredRecipe.length <= 0
+            ? recipies.map((x) => <RecipeCard key={x.id} recipe={x} />)
+            : filteredRecipe.map((x) => <RecipeCard key={x.id} recipe={x} />)}
+        </CatalogGrid>
+      )}
     </Wrapper>
   );
 };
 const Wrapper = styled.section`
   display: grid;
+  .empty {
+    animation: 1500ms empty ease-in;
+    display: flex;
+    justify-self: center;
+    font-size: 40;
+    color: #dfe2db;
+  }
 `;
 
 const CatalogGrid = styled.section`

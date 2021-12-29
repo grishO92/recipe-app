@@ -19,7 +19,7 @@ export const Edit = () => {
       });
   }, [id]);
 
-  const onRecipeUpdate = (e) => {
+  const onRecipeUpdate = async (e) => {
     e.preventDefault();
 
     let {
@@ -34,7 +34,7 @@ export const Edit = () => {
       directions,
     } = Object.fromEntries(new FormData(e.currentTarget));
 
-    updateRecipe(id, {
+    await updateRecipe(id, {
       title,
       imgUrl,
       description,
@@ -44,9 +44,8 @@ export const Edit = () => {
       category,
       ingredients: ingredients.split(','),
       directions,
-    }).then((result) => {
-      navigate(`/details/${id}`);
     });
+    navigate(`/details/${id}`);
   };
 
   return (

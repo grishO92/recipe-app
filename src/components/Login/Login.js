@@ -61,8 +61,8 @@ export const Login = () => {
                   id="email"
                   placeholder="Enter Email"
                 />
-                {errors && <p className="error">{errors.email}</p>}
               </section>
+              {errors && <p className="error">{errors.email}</p>}
               <section className="inputs">
                 <label htmlFor="password">Password</label>
                 <input
@@ -71,8 +71,8 @@ export const Login = () => {
                   id="password"
                   placeholder="Enter Password"
                 />
-                {errors && <p className="error">{errors.password}</p>}
               </section>
+              {errors && <p className="error">{errors.password}</p>}
               <button disabled={loading} type="submit">
                 Log in
               </button>
@@ -118,6 +118,11 @@ const Wrapper = styled.section`
     background-image: url(${bg});
     color: #dfe2db;
     border-radius: 8px;
+
+    .error {
+      align-self: center;
+      color: crimson;
+    }
 
     h2 {
       display: flex;
