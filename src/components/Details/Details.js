@@ -351,10 +351,12 @@ const Wrapper = styled.section`
       background: transparent;
       border: 2px solid transparent;
       cursor: pointer;
+      transition-duration: 300ms;
 
       &:hover {
         color: rgb(255, 194, 0);
         transform: scale(1.5);
+        transition-duration: 150ms;
       }
       &:focus.delete {
         color: crimson;

@@ -53,6 +53,7 @@ export const Catalog = () => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.section`
   display: grid;
   .empty {
