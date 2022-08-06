@@ -106,7 +106,7 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     background: linear-gradient(
       0deg,
       rgba(25, 25, 25, 1) 0%,
