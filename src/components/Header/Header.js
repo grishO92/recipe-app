@@ -51,7 +51,7 @@ export const Header = () => {
 };
 
 const NavWrapper = styled.header`
-  animation: 300ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation: 700ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
   top: 0;
   left: 0;
   right: 0;
@@ -61,14 +61,14 @@ const NavWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   font-size: 25px;
-  padding: 15px 40px;
+  padding: 20px 250px;
   background: linear-gradient(
     90deg,
     rgba(16, 16, 16, 0.99) 0%,
     rgba(30, 30, 30, 0.99) 50%,
     rgba(16, 16, 16, 0.99) 100%
   );
-  /* background-image: url(${bg}); */
+  background-image: url(${bg});
   background-size: cover;
   box-shadow: 0px 20px 15px -8px black;
   .logo {
