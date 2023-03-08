@@ -20,9 +20,12 @@ export const Edit = () => {
       .catch((err) => {
         console.log(err);
       });
+    return () => {
+      setRecipe([]);
+    };
   }, [id]);
 
-  const onRecipeUpdate = async (e) => {
+  const onRecipeUpdate = (e) => {
     e.preventDefault();
 
     let {
@@ -37,7 +40,7 @@ export const Edit = () => {
       directions,
     } = Object.fromEntries(new FormData(e.currentTarget));
 
-    await updateRecipe(id, {
+    updateRecipe(id, {
       title,
       imgUrl,
       description,

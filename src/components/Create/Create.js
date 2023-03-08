@@ -14,7 +14,7 @@ export const Create = () => {
   const [errors, setErrors] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const onRecipeCreate = async (e) => {
+  const onRecipeCreate = (e) => {
     e.preventDefault();
 
     let {
@@ -33,7 +33,7 @@ export const Create = () => {
       setErrors('');
       setLoading(true);
 
-      await createRecipe({
+      createRecipe({
         title,
         imgUrl,
         description,

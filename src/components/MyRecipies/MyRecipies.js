@@ -21,6 +21,9 @@ export const MyRecipies = () => {
       .catch((err) => {
         console.log(err);
       });
+    return () => {
+      setRecipies([]);
+    };
   }, [user.uid]);
 
   const onClickHandler = (e) => {

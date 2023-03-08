@@ -26,12 +26,21 @@ export const Details = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    return () => {
+      setRecipe([]);
+      setRecipies([]);
+    };
   }, []);
 
   useEffect(() => {
-    onSnapshot(doc(db, 'recipies', id), (doc) => {
+    const unsubscribe = onSnapshot(doc(db, 'recipies', id), (doc) => {
       setRecipe(doc.data());
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, [id]);
 
   const buttonClickHandler = (e) => {

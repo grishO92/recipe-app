@@ -15,7 +15,7 @@ export const Register = () => {
   const [loading, setLoading] = useState(false);
   const formErrors = {};
 
-  const onRegister = async (e) => {
+  const onRegister = (e) => {
     e.preventDefault();
 
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -26,7 +26,7 @@ export const Register = () => {
       setErrors({});
       setLoading(true);
 
-      await register(email, password);
+      register(email, password);
       navigate('/', { replace: true });
     } catch {
       if (!email) {
@@ -44,6 +44,7 @@ export const Register = () => {
       }
       setErrors(formErrors);
     }
+    setErrors({});
     setLoading(false);
   };
 

@@ -16,6 +16,10 @@ export const Catalog = () => {
       .catch((err) => {
         console.log(err);
       });
+    return () => {
+      setRecipies([]);
+      setFilteredRecipe([]);
+    };
   }, []);
 
   const onClickHandler = (e) => {

@@ -15,7 +15,7 @@ export const Login = () => {
   const [loading, setLoading] = useState(false);
   const formErrors = {};
 
-  const onLogin = async (e) => {
+  const onLogin = (e) => {
     e.preventDefault();
 
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -26,9 +26,9 @@ export const Login = () => {
       setErrors({});
       setLoading(true);
 
-      await login(email, password);
+      login(email, password);
       navigate('/', { replace: true });
-    } catch {
+    } catch (error) {
       if (!email) {
         formErrors.email = 'Email is required!';
       } else if (!regex.test(email)) {
@@ -44,6 +44,7 @@ export const Login = () => {
       }
       setErrors(formErrors);
     }
+    setErrors({});
     setLoading(false);
   };
 
