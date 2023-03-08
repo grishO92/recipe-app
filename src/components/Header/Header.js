@@ -68,7 +68,7 @@ const NavWrapper = styled.header`
     rgba(30, 30, 30, 0.99) 50%,
     rgba(16, 16, 16, 0.99) 100%
   );
-  background-image: url(${bg});
+  /* background-image: url(${bg}); */
   background-size: cover;
   box-shadow: 0px 20px 15px -8px black;
   .logo {
