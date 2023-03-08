@@ -51,7 +51,7 @@ export const Header = () => {
 };
 
 const NavWrapper = styled.header`
-  animation: 700ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation: 300ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
   top: 0;
   left: 0;
   right: 0;
