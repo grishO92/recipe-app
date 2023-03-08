@@ -29,3 +29,5 @@ An app for your favorite recipies!
 In the project directory, you can run:
 
 ### `npm start`
+
+live demo: https://react-recipeland.web.app/
