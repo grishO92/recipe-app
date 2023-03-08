@@ -10,6 +10,7 @@ import { Register } from './components/Register/Register';
 import { Create } from './components/Create/Create';
 import { Edit } from './components/Edit/Edit';
 import { Details } from './components/Details/Details';
+import { Page404 } from './components/404/Page404';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import { ProtectedRoute } from './components/util/ProtectedRoute';
 
@@ -49,6 +50,7 @@ function App() {
           />
 
           <Route path="/details/:id" element={<Details />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </Content>
     </UserAuthContextProvider>

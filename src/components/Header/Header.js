@@ -61,7 +61,7 @@ const NavWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   font-size: 25px;
-  padding: 20px 250px;
+  padding: 25px 250px;
   background: linear-gradient(
     90deg,
     rgba(16, 16, 16, 0.99) 0%,
