@@ -56,7 +56,7 @@ export const Edit = () => {
 
   return (
     <>
-      {user.uid === recipe.author ? (
+      {user.uid && user.uid === recipe.author ? (
         <Wrapper>
           <form onSubmit={onRecipeUpdate} method="PUT" className="edit">
             <h2>Edit recipe</h2>
