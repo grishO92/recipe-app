@@ -18,34 +18,59 @@ export const Login = () => {
   const onLogin = (e) => {
     e.preventDefault();
 
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     let { email, password } = Object.fromEntries(new FormData(e.currentTarget));
 
-    try {
-      setErrors({});
-      setLoading(true);
-
-      login(email, password);
-      navigate('/', { replace: true });
-    } catch (error) {
-      if (!email) {
-        formErrors.email = 'Email is required!';
-      } else if (!regex.test(email)) {
-        formErrors.email = 'This is not a valid email!';
-      }
-
-      if (!password) {
-        formErrors.password = 'Password is required!';
-      } else if (password.length < 6) {
-        formErrors.password = 'Password is less than 6 characters!';
-      } else if (password.length > 15) {
-        formErrors.password = "Password can't be more than 15 characters!";
-      }
-      setErrors(formErrors);
-    }
     setErrors({});
-    setLoading(false);
+    setLoading(true);
+
+    login(email, password)
+      .then((user) => {
+        console.log(user);
+        navigate('/', { replace: true });
+      })
+      .catch((error) => {
+        if (error.message.includes('invalid-email')) {
+          formErrors.error = 'invalid email';
+        }
+        if (error.message.includes('internal-error')) {
+          formErrors.error = 'missing password';
+        }
+        if (error.message.includes('user-not-found')) {
+          formErrors.error = 'no such user';
+        }
+        if (error.message.includes('wrong-password')) {
+          formErrors.error = 'wrong-password';
+        }
+        if (error.message.includes('too-many-requests')) {
+          formErrors.error =
+            'too many failed login attempts. Please try again later!';
+        }
+        // if (!email && !password) {
+        //   console.log('no email no password');
+        //   formErrors.error = 'Email and password are required!';
+        //   setErrors(formErrors);
+        // } else if (
+        //   !email
+        //   // || (email && error.message.includes('auth/invalid-email'))
+        // ) {
+        //   console.log('no valid email');
+        //   formErrors.error = 'This is not a valid email!';
+        // } else if (!password) {
+        //   formErrors.error = 'Password is required!';
+        // } else if (password.length < 6) {
+        //   formErrors.error = 'Password is less than 6 characters!';
+        // } else if (password.length > 15) {
+        //   formErrors.error = "Password can't be more than 15 characters!";
+        // }
+
+        // formErrors.error = error.message;
+
+        setErrors(formErrors);
+        // setErrors({});
+        setLoading(false);
+      });
   };
 
   return (
@@ -63,7 +88,6 @@ export const Login = () => {
                 placeholder="Enter Email"
               />
             </section>
-            {errors && <p className="error">{errors.email}</p>}
             <section className="inputs">
               <label htmlFor="password">Password</label>
               <input
@@ -73,10 +97,10 @@ export const Login = () => {
                 placeholder="Enter Password"
               />
             </section>
-            {errors && <p className="error">{errors.password}</p>}
             <button disabled={loading} type="submit">
               Log in
             </button>
+            {errors && <p className="error">{errors.error}</p>}
           </form>
           <h5 className="hidden">
             Don't have an account? Click

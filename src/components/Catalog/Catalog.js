@@ -24,10 +24,13 @@ export const Catalog = () => {
 
   const onClickHandler = (e) => {
     if (e.target.className === 'fas fa-border-all') {
+      console.log('all');
       setFilteredRecipe(recipies);
     } else if (e.target.className === 'fas fa-glass-whiskey') {
+      console.log('drinks');
       setFilteredRecipe(recipies.filter((x) => x.category === 'Drinks'));
     } else if (e.target.className === 'fas fa-hamburger') {
+      console.log('food');
       setFilteredRecipe(recipies.filter((x) => x.category === 'Foods'));
     }
   };
