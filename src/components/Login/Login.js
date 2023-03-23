@@ -18,59 +18,43 @@ export const Login = () => {
   const onLogin = (e) => {
     e.preventDefault();
 
-    // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     let { email, password } = Object.fromEntries(new FormData(e.currentTarget));
 
     setErrors({});
     setLoading(true);
+    if (!email || !regex.test(email) || !password) {
+      formErrors.error = 'Invalid email or password!';
+      setErrors(formErrors);
+      setLoading(false);
+    } else {
+      login(email, password)
+        .then((user) => {
+          navigate('/', { replace: true });
+        })
+        .catch((error) => {
+          if (error.message.includes('Invalid-email')) {
+            formErrors.error = 'Invalid email or password!';
+          }
+          if (error.message.includes('internal-error')) {
+            formErrors.error = 'Invalid email or password!';
+          }
+          if (error.message.includes('user-not-found')) {
+            formErrors.error = 'Invalid email or password!';
+          }
+          if (error.message.includes('wrong-password')) {
+            formErrors.error = 'Invalid email or password!';
+          }
+          if (error.message.includes('too-many-requests')) {
+            formErrors.error =
+              'Too many failed login attempts. Please try again later!';
+          }
 
-    login(email, password)
-      .then((user) => {
-        console.log(user);
-        navigate('/', { replace: true });
-      })
-      .catch((error) => {
-        if (error.message.includes('invalid-email')) {
-          formErrors.error = 'invalid email';
-        }
-        if (error.message.includes('internal-error')) {
-          formErrors.error = 'missing password';
-        }
-        if (error.message.includes('user-not-found')) {
-          formErrors.error = 'no such user';
-        }
-        if (error.message.includes('wrong-password')) {
-          formErrors.error = 'wrong-password';
-        }
-        if (error.message.includes('too-many-requests')) {
-          formErrors.error =
-            'too many failed login attempts. Please try again later!';
-        }
-        // if (!email && !password) {
-        //   console.log('no email no password');
-        //   formErrors.error = 'Email and password are required!';
-        //   setErrors(formErrors);
-        // } else if (
-        //   !email
-        //   // || (email && error.message.includes('auth/invalid-email'))
-        // ) {
-        //   console.log('no valid email');
-        //   formErrors.error = 'This is not a valid email!';
-        // } else if (!password) {
-        //   formErrors.error = 'Password is required!';
-        // } else if (password.length < 6) {
-        //   formErrors.error = 'Password is less than 6 characters!';
-        // } else if (password.length > 15) {
-        //   formErrors.error = "Password can't be more than 15 characters!";
-        // }
-
-        // formErrors.error = error.message;
-
-        setErrors(formErrors);
-        // setErrors({});
-        setLoading(false);
-      });
+          setErrors(formErrors);
+          setLoading(false);
+        });
+    }
   };
 
   return (
