@@ -30,9 +30,7 @@ export const Login = () => {
       setLoading(false);
     } else {
       login(email, password)
-        .then((user) => {
-          navigate('/', { replace: true });
-        })
+        .then((user) => navigate('/', { replace: true }))
         .catch((error) => {
           if (error.message.includes('Invalid-email')) {
             formErrors.error = 'Invalid email or password!';
@@ -125,10 +123,17 @@ const Wrapper = styled.section`
     background-image: url(${bg});
     color: #dfe2db;
     border-radius: 8px;
+    position: relative;
 
     .error {
       align-self: center;
+      position: absolute;
+      bottom: 20px;
       color: crimson;
+      text-transform: uppercase;
+      text-shadow: #191919;
+      font-weight: 600;
+      font-size: 14px;
     }
 
     h2 {
