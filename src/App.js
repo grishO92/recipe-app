@@ -64,10 +64,3 @@ export default App;
 const Content = styled.section`
   margin: 130px 0 60px 0;
 `;
-
-// const Footer = styled.footer`
-//   background: #191911;
-//   position: absolute;
-//   inset: auto 0 0 0;
-//   color: white;
-// `;

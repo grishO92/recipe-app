@@ -19,6 +19,7 @@ export const Footer = () => {
 };
 
 const FooterWrapper = styled.footer`
+  animation: 700ms slideUp cubic-bezier(0.785, 0.135, 0.15, 0.86);
   background: #0b0c0f;
   position: fixed;
   inset: auto 0 0 0;
