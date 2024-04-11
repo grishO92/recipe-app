@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { RecipeCard } from '../Partial/RecipeCard';
 import { getAllRecipies } from '../../services/Crud';
-import bg from '../../bg.jpg';
 
 export const Catalog = () => {
   const [recipies, setRecipies] = useState([]);
@@ -86,8 +85,9 @@ const Category = styled.aside`
   z-index: 1;
   float: left;
   animation: 700ms slideToRight cubic-bezier(0.785, 0.135, 0.15, 0.86);
-  box-shadow: 0px 20px 15px -8px black;
-  background: url(${bg});
+  /* box-shadow: 0px 20px 15px -8px black; */
+  background: #23262d;
+
   color: #dfe2db;
   border-radius: 0 8px 8px 0;
   position: absolute;

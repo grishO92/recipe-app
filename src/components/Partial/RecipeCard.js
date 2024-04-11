@@ -21,10 +21,10 @@ const Card = styled.article`
   overflow: hidden;
   border-radius: 0.5rem;
   opacity: 0.8;
-  box-shadow: 0px 5px 15px -8px black;
+  /* box-shadow: 0px 5px 15px -8px black; */
 
   &:hover {
-    box-shadow: 0px 10px 15px -5px black;
+    /* box-shadow: 0px 10px 15px -5px black; */
     opacity: 1;
     transform: scale(1.05);
     transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);

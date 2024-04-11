@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { createRecipe } from '../../services/Crud';
 import { useNavigate } from 'react-router';
-import bg from '../../bg.jpg';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { useState } from 'react';
 
@@ -222,7 +221,7 @@ const Wrapper = styled.section`
   }
 
   .create {
-    box-shadow: 0px 5px 15px 0px black;
+    /* box-shadow: 0px 5px 15px 0px black; */
     min-width: 600px;
     height: auto;
     padding: 20px 3rem;
@@ -232,13 +231,7 @@ const Wrapper = styled.section`
     text-align: center;
     flex-direction: column;
     gap: 15px;
-    background: linear-gradient(
-      0deg,
-      rgba(25, 25, 25, 1) 0%,
-      rgba(15, 15, 15, 1) 50%,
-      rgba(25, 25, 25, 1) 100%
-    );
-    background-image: url(${bg});
+    background: #23262d;
 
     color: #dfe2db;
     border-radius: 8px;

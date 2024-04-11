@@ -2,8 +2,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import bg from '../../bg.jpg';
-import bg1 from '../../bg1.jpg';
+
 import { useUserAuth } from '../../context/UserAuthContext';
 import { db } from '../../firebaseConfig';
 
@@ -199,7 +198,7 @@ const DeleteModal = styled.article`
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: #383b43;
 
   .bg {
     display: flex;
@@ -211,8 +210,9 @@ const DeleteModal = styled.article`
 
     .modal {
       animation: 500ms fadeIn cubic-bezier(0.785, 0.135, 0.15, 0.86);
-      box-shadow: 0px 5px 15px 0px black;
-      background-image: url(${bg});
+      /* box-shadow: 0px 5px 15px 0px black; */
+      background: #23262d;
+
       color: #dfe2db;
       padding: 50px 80px;
       border-radius: 8px;
@@ -231,7 +231,7 @@ const DeleteModal = styled.article`
           border-radius: 8px;
           border: 2px solid rgb(255, 194, 0);
           background: rgb(255, 194, 0);
-          color: #191919;
+          color: #191911;
           cursor: pointer;
         }
       }
@@ -246,7 +246,7 @@ const Wrapper = styled.section`
 
   .details {
     z-index: 0;
-    box-shadow: 0px 5px 15px 0px black;
+    /* box-shadow: 0px 5px 15px 0px black; */
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -257,9 +257,9 @@ const Wrapper = styled.section`
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
-    background-image: url(${bg});
+    background: #1c2027;
 
-    color: #dfe2db;
+    color: white;
     border-radius: 8px;
     min-width: 768px;
     max-width: 1560px;
@@ -337,18 +337,18 @@ const Wrapper = styled.section`
     display: flex;
     flex-direction: row;
     animation: 1500ms slideUp cubic-bezier(0.785, 0.135, 0.15, 0.86);
-    box-shadow: 0px 5px 15px 0px black;
+    /* box-shadow: 0px 5px 15px 0px black; */
     border-radius: 8px 8px 0 0;
     gap: 20px;
     align-items: center;
     justify-content: space-evenly;
-    background: url(${bg1});
+    background: #23262d;
     width: 25%;
     padding: 8px;
     align-self: center;
 
     .likes {
-      color: #dfe2db;
+      color: white;
       font-size: 25px;
     }
 
@@ -357,7 +357,7 @@ const Wrapper = styled.section`
       padding: 0.5rem;
       font-size: 20px;
       border-radius: 8px;
-      color: #dfe2db;
+      color: white;
       background: transparent;
       border: 2px solid transparent;
       cursor: pointer;
@@ -376,7 +376,7 @@ const Wrapper = styled.section`
   .how-to-prep {
     z-index: -1;
     animation: 1500ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
-    box-shadow: 0px 5px 15px 0px black;
+    /* box-shadow: 0px 5px 15px 0px black; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -387,9 +387,9 @@ const Wrapper = styled.section`
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
-    background: url(${bg1});
+    background: #23262d;
 
-    color: #dfe2db;
+    color: white;
     border-radius: 0 0 8px 8px;
     width: 90%;
     padding: 60px;

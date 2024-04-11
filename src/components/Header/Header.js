@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import bg from '../../bg.jpg';
 import { logout } from '../../services/Auth';
 import { useUserAuth } from '../../context/UserAuthContext';
 
@@ -62,15 +61,9 @@ const NavWrapper = styled.header`
   align-items: center;
   font-size: 25px;
   padding: 25px 250px;
-  background: linear-gradient(
-    90deg,
-    rgba(16, 16, 16, 0.99) 0%,
-    rgba(30, 30, 30, 0.99) 50%,
-    rgba(16, 16, 16, 0.99) 100%
-  );
-  background-image: url(${bg});
-  background-size: cover;
-  box-shadow: 0px 20px 15px -8px black;
+
+  background: #13161b;
+
   .logo {
     text-decoration: none;
   }

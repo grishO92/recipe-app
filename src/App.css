@@ -11,18 +11,13 @@
 
 ::placeholder {
   font-size: 20px;
-  /* font-family: 'Montserrat', sans-serif; */
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
   margin: 0 auto;
   width: 1300px;
-  background: linear-gradient(
-    90deg,
-    rgba(20, 20, 20, 1) 0%,
-    rgb(30, 30, 30) 50%,
-    rgba(20, 20, 20, 1) 100%
-  );
+  background: #383b43;
 }
 
 @keyframes empty {

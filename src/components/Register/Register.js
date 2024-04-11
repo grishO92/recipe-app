@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import bg from '../../bg.jpg';
-import bg1 from '../../bg1.jpg';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { register } from '../../services/Auth';
 import { Page404 } from '../404/Page404';
@@ -101,7 +99,7 @@ const Wrapper = styled.section`
 
   .register {
     z-index: 1;
-    box-shadow: 0px 5px 15px 0px black;
+    /* box-shadow: 0px 5px 15px 0px black; */
     width: 500px;
     height: auto;
     padding: 60px;
@@ -115,7 +113,7 @@ const Wrapper = styled.section`
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
-    background-image: url(${bg});
+    background: #1c2027;
     position: relative;
     color: #dfe2db;
     border-radius: 8px;
@@ -169,14 +167,14 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     gap: 4px;
-    box-shadow: 0px 5px 15px 0px black;
+    /* box-shadow: 0px 5px 15px 0px black; */
     background: linear-gradient(
       0deg,
       rgba(25, 25, 25, 1) 0%,
       rgba(15, 15, 15, 1) 50%,
       rgba(25, 25, 25, 1) 100%
     );
-    background-image: url(${bg1});
+    background: #23262d;
 
     animation: 1500ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
     color: #dfe2db;
