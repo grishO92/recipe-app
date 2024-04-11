@@ -32,7 +32,26 @@ body {
   0% {
     transform: translateY(-100%);
   }
+
   100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes slideDown1 {
+  0% {
+    opacity: 0;
+
+    transform: translateY(-100%);
+  }
+  40% {
+    opacity: 0.9;
+  }
+
+  94% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
     transform: translateY(0%);
   }
 }

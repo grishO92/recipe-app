@@ -374,8 +374,8 @@ const Wrapper = styled.section`
     }
   }
   .how-to-prep {
-    z-index: -1;
-    animation: 1500ms slideDown cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    z-index: -2;
+    animation: 1500ms slideDown1 cubic-bezier(0.185, 0.135, 0.15, 0.86);
     /* box-shadow: 0px 5px 15px 0px black; */
     display: flex;
     justify-content: center;
