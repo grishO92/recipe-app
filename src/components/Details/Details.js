@@ -131,7 +131,6 @@ export const Details = () => {
               </section>
               <section className="card">
                 <h2>Details</h2>
-
                 <article className="detail-grid">
                   <section className="desc">
                     <h3 className="title">
@@ -146,12 +145,7 @@ export const Details = () => {
                       <span>description: </span>
                       {recipe?.description}
                     </h3>
-                    <ul>
-                      <h4>Recipe:</h4>
-                      {recipe?.ingredients?.map((x) => (
-                        <li key={x}>{x}</li>
-                      ))}
-                    </ul>
+
                     <article className="prep-info">
                       <section className="prep-info-sub">
                         <h3 className="prep-info-sub-title">
@@ -178,8 +172,14 @@ export const Details = () => {
             </article>
           </section>
           <section className="how-to-prep">
+            <h3 className="how-to">How to prepare?</h3>
             <section className="how-to-desc">
-              <h3 className="how-to">How to prepare?</h3>
+              <ul className="ingrr">
+                <h4>Recipe:</h4>
+                {recipe?.ingredients?.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
               <p className="how-to-info">{recipe?.directions}</p>
             </section>
           </section>
@@ -268,10 +268,12 @@ const Wrapper = styled.section`
       flex-direction: row;
 
       .img-wrapper {
+        width: 670px;
+        height: 530px;
         .img {
           object-position: center;
           object-fit: cover;
-          width: 750px;
+          width: 100%;
           height: 100%;
           border-radius: 0.5rem 0 0 0.5rem;
         }
@@ -308,12 +310,9 @@ const Wrapper = styled.section`
               font-size: 22px;
               font-weight: 300;
             }
-            li {
-              font-weight: 600;
-              list-style: circle;
-            }
             .prep-info {
               display: flex;
+              flex-direction: row;
               gap: 40px;
 
               .prep-info-sub {
@@ -322,6 +321,7 @@ const Wrapper = styled.section`
                 flex-direction: column;
                 text-align: center;
                 gap: 10px;
+
                 p {
                   font-size: 18px;
                 }
@@ -332,6 +332,7 @@ const Wrapper = styled.section`
       }
     }
   }
+
   .btns {
     display: flex;
     flex-direction: row;
@@ -399,8 +400,11 @@ const Wrapper = styled.section`
     .how-to-desc {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      text-align: center;
+      gap: 40px;
+      /* text-align: center; */
+      .ingrr {
+        list-style-type: none;
+      }
       .how-to-info {
         text-align: left;
       }
