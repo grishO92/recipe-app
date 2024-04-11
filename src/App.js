@@ -13,6 +13,7 @@ import { Details } from './components/Details/Details';
 import { Page404 } from './components/404/Page404';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import { ProtectedRoute } from './components/util/ProtectedRoute';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Content>
+      <Footer />
     </UserAuthContextProvider>
   );
 }
@@ -62,3 +64,10 @@ export default App;
 const Content = styled.section`
   margin: 130px 0 60px 0;
 `;
+
+// const Footer = styled.footer`
+//   background: #191911;
+//   position: absolute;
+//   inset: auto 0 0 0;
+//   color: white;
+// `;
